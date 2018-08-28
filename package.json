@@ -1,15 +1,15 @@
 {
   "name": "@ahrefs/bs-atdgen-codec-runtime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "bucklescript runtime for atdgen",
   "main": "src/atdgen_codec_runtime.bs.js",
   "repository": "https://github.com/ahrefs/bs-atdgen-codec-runtime.git",
   "author": "Ahrefs <louis.roche@ahrefs.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahrefs/bs-atdgen-code-runtime/issues"
+    "url": "https://github.com/ahrefs/bs-atdgen-codec-runtime/issues"
   },
-  "homepage": "https://github.com/ahrefs/bs-atdgen-code-runtime#readme",
+  "homepage": "https://github.com/ahrefs/bs-atdgen-codec-runtime#readme",
   "keywords": [
     "atdgen",
     "json",
@@ -19,7 +19,7 @@
     "reason",
     "reasonml",
     "ocaml",
-    "bs-atdgen-code-runtime",
+    "bs-atdgen-codec-runtime",
     "bs-platform",
     "bucklescript"
   ],
@@ -29,6 +29,9 @@
     "watch": "bsb -make-world -w"
   },
   "devDependencies": {
+    "bs-platform": "^4.0.5"
+  },
+  "peerDependencies": {
     "bs-platform": "^4.0.5"
   },
   "dependencies": {
