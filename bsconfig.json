@@ -1,0 +1,24 @@
+{
+  "name": "@ahrefs/bs-atdgen-codec-runtime",
+  "namespace": false,
+  "version": "1.0.0",
+  "bsc-flags": [
+    "-bs-no-version-header",
+    "-bs-super-errors"
+  ],
+  "sources": {
+    "dir": "src",
+    "subdirs": true
+  },
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "@glennsl/bs-json"
+  ],
+  "warnings": {
+    "error" : "+101"
+  }
+}
