@@ -1,4 +1,4 @@
-# bs-aws-lambda
+# bs-atdgen-codec-runtime
 
 `bs-atdgen-codec-runtime` is a bucklescript runtime for
 [atdgen](https://github.com/mjambon/atd). It is based on the json type
