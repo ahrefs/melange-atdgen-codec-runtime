@@ -2,7 +2,8 @@
 
 `bs-atdgen-codec-runtime` is a bucklescript runtime for
 [atdgen](https://github.com/mjambon/atd). It is based on the json type
-provided by bucklescript and combinators of [@glennsl/bs-json]().
+provided by bucklescript and combinators of 
+[@glennsl/bs-json](https://github.com/glennsl/bs-json).
 
 ## Installation
 
