@@ -1,0 +1,34 @@
+(*
+  atdgen -t test.atd
+  atdgen -bs test.atd -open Test_t
+*)
+
+type int64 = int <ocaml repr="int64">
+
+type r = {
+  a: int;
+  b: string;
+}
+
+type v = [
+  | A of int
+  | B of string
+] <ocaml repr="classic">
+
+type vl = v list
+
+type vp = [
+  | A of int
+  | B of string
+]
+
+type vpl = vp list
+
+type ro = {
+  c: string;
+  ?o: int64 option;
+}
+
+type t = (int * string * float)
+
+type n = int nullable
