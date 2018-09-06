@@ -81,8 +81,12 @@ struct
 
   let decode f json = f json
 
-  let unit j = if (Obj.magic j : 'a Js.null) == Js.null then () else raise (DecodeError "not null")
+  let unit j =
+    if (Obj.magic j : 'a Js.null) == Js.null
+    then ()
+    else raise (DecodeError (sprintf "Expected null, got %s" (Js.Json.stringify j)))
 
+  let int32 j = Int32.of_string (string j)
   let int64 j = Int64.of_string (string j)
 
   let nullable decode json =
@@ -118,7 +122,13 @@ struct
 
   let option_as_constr f =
     either
-      (fun x -> if string x = "None" then None else raise (DecodeError "bad None"))
-      (fun x -> match pair string f x with ("Some",v) -> Some v | _ -> raise (DecodeError "bad Some"))
+      (fun x ->
+         if string x = "None"
+         then None
+         else raise (DecodeError (sprintf "Expected None, got %s" (Js.Json.stringify x))))
+      (fun x ->
+         match pair string f x with
+         | ("Some",v) -> Some v
+         | _ -> raise (DecodeError (sprintf "Expected Some _, got %s" (Js.Json.stringify x))))
 
 end

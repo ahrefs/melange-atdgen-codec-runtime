@@ -62,6 +62,7 @@ module Decode : sig
   val float : float t
   val char : char t
   val string : string t
+  val int32 : int32 t
   val int64 : int64 t
 
   val optional : 'a t -> 'a option t
