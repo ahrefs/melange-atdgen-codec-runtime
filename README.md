@@ -2,7 +2,7 @@
 
 `bs-atdgen-codec-runtime` is a bucklescript runtime for
 [atdgen](https://github.com/mjambon/atd). It is based on the json type
-provided by bucklescript and combinators of 
+provided by bucklescript and combinators of
 [@glennsl/bs-json](https://github.com/glennsl/bs-json).
 
 ## Installation
@@ -22,3 +22,8 @@ Add `@ahrefs/bs-atdgen-codec-runtime` to the `bs-dependencies` of
 
 To write atd type definitions, please have a look at the [great atd
 documentation](https://atd.readthedocs.io/en/latest/).
+
+## Full example
+
+The [example](example) directory contains a full example of a simple
+cli to read and write data in a JSON file.

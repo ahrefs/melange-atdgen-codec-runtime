@@ -1,0 +1,23 @@
+
+{
+  "name": "client",
+  "version": "0.0.1",
+  "sources": {
+    "dir" : "src",
+    "subdirs" : true
+  },
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "@ahrefs/bs-atdgen-codec-runtime"
+  ],
+  "warnings": {
+    "error" : "+101"
+  },
+  "generate-merlin": true,
+  "namespace": true,
+  "refmt": 3
+}

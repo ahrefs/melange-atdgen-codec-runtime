@@ -1,0 +1,19 @@
+(* This is a comment. Same syntax as in ocaml. *)
+
+type access = [ Private | Public ]
+
+(* Some people don't want to provide a phone number, make it optional *)
+type person = {
+  name: string;
+  email: string;
+  ?phone: string nullable;
+}
+
+type event = {
+  access: access;
+  name: string;
+  host: person;
+  guests: person list;
+}
+
+type events = event list
