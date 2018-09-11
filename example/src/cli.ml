@@ -2,11 +2,12 @@ let event_file = "events.json"
 
 let print_event (event: Meetup_t.event) =
   Js.log2 "=== %s summary ===" event.name;
+  Js.log2 "date: %s" (Js.Date.toUTCString event.date);
   Js.log2 "access: %s"
     (match event.access with
      | `Private -> "private (registration required)"
      | `Public -> "public");
-  Js.log4 "host: %s %s%s"
+  Js.log4 "host: %s <%s>%s"
     event.host.name event.host.email
     (match event.host.phone with None -> "" | Some p -> " (" ^ p ^ ")");
   Js.log2 "guests: %d" (List.length event.guests)
@@ -24,7 +25,7 @@ let write_events events =
   (* turn a list of records into json *)
   let json = Atdgen_codec_runtime.Encode.encode Meetup_bs.write_events events in
   (* convert the json to string *)
-  let file_content = Js.Json.stringify json in
+  let file_content = Js.Json.stringifyWithSpace json 2 in
   (* write the json in our file *)
   Node_fs.writeFileAsUtf8Sync event_file file_content
 
@@ -32,14 +33,22 @@ let print_events () =
   read_events ()
   |> List.iter print_event
 
-let add_event () =
+let add_event name email =
   let events = read_events () in
+  let host =
+    {
+      Meetup_t.name;
+      email;
+      phone = None;
+    }
+  in
   let new_event =
     {
       Meetup_t.access = `Public;
       name = "OCaml/Reason Meetup!";
-      host = { name = "Louis"; email = "louis@nospam.com"; phone = None; };
-      guests = [];
+      host;
+      date = Js.Date.make ();
+      guests = [host];
     }
   in
   write_events (new_event :: events)
@@ -47,5 +56,5 @@ let add_event () =
 let () =
   match Array.to_list Sys.argv with
   | _ :: _ :: "print" :: _ -> print_events ()
-  | _ :: _ :: "add" :: _ -> add_event ()
+  | _ :: _ :: "add" :: name :: email :: _ -> add_event name email
   | _  -> print_endline "usage: nodejs cli.bs.js <print|add>"

@@ -2,6 +2,8 @@
 
 type access = [ Private | Public ]
 
+type date = float wrap <ocaml module="Js.Date" wrap="Js.Date.fromFloat" unwrap="Js.Date.valueOf">
+
 (* Some people don't want to provide a phone number, make it optional *)
 type person = {
   name: string;
@@ -13,6 +15,7 @@ type event = {
   access: access;
   name: string;
   host: person;
+  date: date;
   guests: person list;
 }
 

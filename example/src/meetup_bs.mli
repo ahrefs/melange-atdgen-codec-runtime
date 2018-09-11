@@ -6,6 +6,10 @@ val read_person :  person Atdgen_codec_runtime.Decode.t
 
 val write_person :  person Atdgen_codec_runtime.Encode.t
 
+val read_date :  date Atdgen_codec_runtime.Decode.t
+
+val write_date :  date Atdgen_codec_runtime.Encode.t
+
 val read_access :  access Atdgen_codec_runtime.Decode.t
 
 val write_access :  access Atdgen_codec_runtime.Encode.t

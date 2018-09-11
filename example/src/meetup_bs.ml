@@ -2,12 +2,12 @@
               [@@@ocaml.warning "-27-32-35-39"]
 open Meetup_t
 
-let write__1 = (
+let write__2 = (
   Atdgen_codec_runtime.Encode.nullable (
     Atdgen_codec_runtime.Encode.string
   )
 )
-let read__1 = (
+let read__2 = (
   Atdgen_codec_runtime.Decode.nullable (
     Atdgen_codec_runtime.Decode.string
   )
@@ -67,6 +67,21 @@ let read_person = (
     )
   )
 )
+let write__1 = (
+    Atdgen_codec_runtime.Encode.float
+  |> Atdgen_codec_runtime.Encode.contramap (Js.Date.valueOf)
+)
+let read__1 = (
+  (
+    Atdgen_codec_runtime.Decode.float
+  ) |> (Atdgen_codec_runtime.Decode.map (Js.Date.fromFloat))
+)
+let write_date = (
+  write__1
+)
+let read_date = (
+  read__1
+)
 let write_access = (
   Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
     | `Private ->
@@ -91,12 +106,12 @@ let read_access = (
       )
   ]
 )
-let write__2 = (
+let write__3 = (
   Atdgen_codec_runtime.Encode.list (
     write_person
   )
 )
-let read__2 = (
+let read__3 = (
   Atdgen_codec_runtime.Decode.list (
     read_person
   )
@@ -129,7 +144,14 @@ let write_event = (
         ;
           Atdgen_codec_runtime.Encode.field
             (
-            write__2
+            write_date
+            )
+          ~name:"date"
+          t.date
+        ;
+          Atdgen_codec_runtime.Encode.field
+            (
+            write__3
             )
           ~name:"guests"
           t.guests
@@ -159,29 +181,35 @@ let read_event = (
               read_person
               |> Atdgen_codec_runtime.Decode.field "host"
             ) json;
+          date =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              read_date
+              |> Atdgen_codec_runtime.Decode.field "date"
+            ) json;
           guests =
             Atdgen_codec_runtime.Decode.decode
             (
-              read__2
+              read__3
               |> Atdgen_codec_runtime.Decode.field "guests"
             ) json;
       } : event)
     )
   )
 )
-let write__3 = (
+let write__4 = (
   Atdgen_codec_runtime.Encode.list (
     write_event
   )
 )
-let read__3 = (
+let read__4 = (
   Atdgen_codec_runtime.Decode.list (
     read_event
   )
 )
 let write_events = (
-  write__3
+  write__4
 )
 let read_events = (
-  read__3
+  read__4
 )

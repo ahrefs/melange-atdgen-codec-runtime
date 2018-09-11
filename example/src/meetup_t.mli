@@ -3,12 +3,15 @@
 
 type person = { name: string; email: string; phone: string option }
 
+type date = Js.Date.t
+
 type access = [ `Private | `Public ]
 
 type event = {
   access: access;
   name: string;
   host: person;
+  date: date;
   guests: person list
 }
 
