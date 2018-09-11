@@ -72,6 +72,8 @@ module Encode = struct
     ) [] fields
     |> object_
 
+  let tuple1 f x = jsonArray [|f x|]
+
   let contramap f g b = g (f b)
 
   let constr0 = string
@@ -123,6 +125,21 @@ struct
     |> map (function
       | None -> default
       | Some s -> s)
+
+  let tuple1 f x =
+    if Js.Array.isArray x then begin
+      let source = (Obj.magic (x : Js.Json.t) : Js.Json.t array) in
+      let length = Js.Array.length source in
+      if length = 1 then
+        try
+          f (Array.unsafe_get source 0)
+        with
+          DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple1")
+      else
+        raise @@ DecodeError ({j|Expected array of length 1, got array of length $length|j})
+    end
+    else
+      raise @@ DecodeError ("Expected array, got " ^ (Js.Json.stringify x))
 
   let enum l =
     let constr0 x =
