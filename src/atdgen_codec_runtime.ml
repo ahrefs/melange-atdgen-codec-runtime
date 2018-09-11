@@ -2,6 +2,8 @@ open Printf
 
 module Json = struct
   type t = Js.Json.t
+  external read_t : t -> t = "%identity"
+  external write_t : t -> t = "%identity"
 end
 
 module Encode = struct
