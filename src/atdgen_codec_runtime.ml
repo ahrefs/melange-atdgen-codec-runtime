@@ -100,6 +100,14 @@ struct
   let int32 j = Int32.of_string (string j)
   let int64 j = Int64.of_string (string j)
 
+  let obj_array f json =
+    dict f json
+    |> Js.Dict.entries
+
+  let obj_list f json =
+    obj_array f json
+    |> Array.to_list
+
   let nullable decode json =
     if (Obj.magic json : 'a Js.null) == Js.null then
       None

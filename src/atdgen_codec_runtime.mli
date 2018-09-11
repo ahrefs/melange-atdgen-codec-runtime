@@ -69,6 +69,9 @@ module Decode : sig
   val list : 'a t -> 'a list t
   val array : 'a t -> 'a array t
 
+  val obj_list : 'a t -> (string * 'a) list t
+  val obj_array : 'a t -> (string * 'a) array t
+
   (* a field that should be present *)
   val field : string -> 'a t -> 'a t
 
