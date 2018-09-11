@@ -29,7 +29,7 @@ module Encode : sig
   type field
 
   val field : ?default:'a -> 'a t -> name:string -> 'a -> field
-  val field_o : 'a t -> name:string -> 'a option -> field
+  val field_o : ?default:'a -> 'a t -> name:string -> 'a option -> field
 
   val obj : field list -> Json.t
 
