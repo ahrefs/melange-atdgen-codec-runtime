@@ -23,6 +23,29 @@ Add `@ahrefs/bs-atdgen-codec-runtime` to the `bs-dependencies` of
 To write atd type definitions, please have a look at the [great atd
 documentation](https://atd.readthedocs.io/en/latest/).
 
+## Simple example
+
+Reason code to query and deserialize the response of a REST API. It
+requires `bs-fetch`.
+
+```
+let get = (url, decode) =>
+  Js.Promise.(
+    Fetch.fetchWithInit(
+      url,
+      Fetch.RequestInit.make(~method_=Get, ()),
+    )
+    |> then_(Fetch.Response.json)
+    |> then_(json => json |> decode |> resolve)
+  );
+
+let v: Meetup_t.events =
+  get(
+    "http://localhost:8000/events",
+    Atdgen_codec_runtime.Decode.decode(Meetup_bs.read_events),
+  );
+```
+
 ## Full example
 
 The [example](example) directory contains a full example of a simple
