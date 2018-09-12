@@ -1,7 +1,7 @@
 {
   "name": "@ahrefs/bs-atdgen-codec-runtime",
   "namespace": false,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "bsc-flags": [
     "-bs-no-version-header",
     "-bs-super-errors"
