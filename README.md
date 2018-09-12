@@ -5,6 +5,10 @@
 provided by bucklescript and combinators of
 [@glennsl/bs-json](https://github.com/glennsl/bs-json).
 
+The support of bucklescript in atdgen has not been released
+yet. atdgen must be installed from the git master branch to have the
+`-bs` option.
+
 ## Installation
 
 ```
