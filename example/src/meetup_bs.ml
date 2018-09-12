@@ -1,6 +1,25 @@
 (* Auto-generated from "meetup.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
-open Meetup_t
+
+type person = Meetup_t.person = {
+  name: string;
+  email: string;
+  phone: string option
+}
+
+type date = Meetup_t.date
+
+type access = Meetup_t.access
+
+type event = Meetup_t.event = {
+  access: access;
+  name: string;
+  host: person;
+  date: date;
+  guests: person list
+}
+
+type events = Meetup_t.events
 
 let write__2 = (
   Atdgen_codec_runtime.Encode.nullable (

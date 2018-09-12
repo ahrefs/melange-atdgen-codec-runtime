@@ -6,7 +6,7 @@
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "atdgen": "atdgen -t src/meetup.atd && atdgen -bs src/meetup.atd -open Meetup_t"
+    "atdgen": "atdgen -t src/meetup.atd && atdgen -bs src/meetup.atd"
   },
   "devDependencies": {
     "bs-platform": "^4.0.5"
