@@ -54,3 +54,7 @@ let v: Meetup_t.events =
 
 The [example](example) directory contains a full example of a simple
 cli to read and write data in a JSON file.
+
+For a complete introduction from atdgen installation to json
+manipulation, please refer to [Getting started with atdgen and
+bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081)

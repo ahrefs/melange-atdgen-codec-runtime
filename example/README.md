@@ -1,5 +1,9 @@
 # Atdgen for bucklescript, the example
 
+A detail explanation of this example is available at [Getting started
+with atdgen and
+bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081)
+
 ## Compile the project
 
 ```bash
