@@ -49,6 +49,8 @@ module Encode : sig
 
   val option_as_constr : 'a t -> 'a option t
 
+  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
+
 end
 
 module Decode : sig
@@ -96,5 +98,7 @@ module Decode : sig
   val nullable : 'a t -> 'a option t
 
   val option_as_constr : 'a t -> 'a option t
+
+  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
 
 end

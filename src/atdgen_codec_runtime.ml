@@ -83,6 +83,10 @@ module Encode = struct
     | None -> string "None"
     | Some s -> pair string f ("Some", s)
 
+  let adapter (restore: Json.t -> Json.t) (writer: 'a t) x =
+    let encoded = writer x in
+    restore encoded
+
 end
 
 module Decode =
@@ -168,5 +172,8 @@ struct
          match pair string f x with
          | ("Some",v) -> Some v
          | _ -> raise (DecodeError (sprintf "Expected Some _, got %s" (Js.Json.stringify x))))
+
+  let adapter (normalize: Json.t -> Json.t) (reader: 'a t) json =
+    reader (normalize json)
 
 end
