@@ -59,5 +59,15 @@ let () =
       ~name:"int64"
       ~write:Test_bs.write_int64
       ~read:Test_bs.read_int64
-      ~data:3L
+      ~data:3L;
+    run_test
+      ~name:"adapter variant 1"
+      ~write:Test_bs.write_adapted
+      ~read:Test_bs.read_adapted
+      ~data:Test_t.(`A {thing = "thing"; other_thing = false;});
+    run_test
+      ~name:"adapter variant 2"
+      ~write:Test_bs.write_adapted
+      ~read:Test_bs.read_adapted
+      ~data:Test_t.(`B {thing = 1;})
   )

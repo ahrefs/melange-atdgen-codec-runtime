@@ -32,3 +32,17 @@ type ro = {
 type t = (int * string * float)
 
 type n = int nullable
+
+type adapted = [
+  | A of a
+  | B of b
+] <json adapter.ocaml="Atdgen_codec_runtime.Json_adapter.Type_field">
+
+type a = {
+  thing: string;
+  other_thing: bool;
+}
+
+type b = {
+  thing: int;
+}

@@ -18,3 +18,9 @@ type ro = { c: string; o: int64 option }
 type r = { a: int; b: string }
 
 type n = int option
+
+type b = { thing: int }
+
+type a = { thing: string; other_thing: bool }
+
+type adapted = [ `A of a | `B of b ]
