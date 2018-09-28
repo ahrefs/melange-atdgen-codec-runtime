@@ -6,6 +6,54 @@ module Json = struct
   external write_t : t -> t = "%identity"
 end
 
+module Json_adapter = struct
+  module type S = sig
+    val normalize : Json.t -> Json.t
+    val restore : Json.t -> Json.t
+  end
+
+  module Type_field = struct
+
+    module type Param = sig
+      val type_field_name : string
+    end
+
+    module Make(Param:Param) : S = struct
+      open Param
+
+      let normalize (json : Json.t) =
+        let open Json_decode in
+        match json |> (at ["type"] string) with
+        | type_ ->
+            let normalized: Json.t = Obj.magic (type_, json) in
+            normalized
+        | exception Invalid_argument _ -> json
+
+      let restore json =
+        match json |> Js.Json.classify with
+        | JSONArray [|v; o|] when Js.typeof v = "string" ->
+            begin match o |> Js.Json.classify with
+              | JSONObject obj ->
+                  Js.Dict.set obj type_field_name v;
+                  Json_encode.dict obj
+              | _ -> json
+            end
+        | _ -> json
+    end
+
+    module Default_param : Param = struct
+      let type_field_name = "type"
+    end
+
+    include Make(Default_param)
+  end
+
+  module Kind_field =
+    Type_field.Make(struct
+      let type_field_name = "kind"
+    end)
+end
+
 module Encode = struct
 
   include Json_encode
