@@ -5,8 +5,8 @@ let print_event (event: Meetup_t.event) =
   Js.log2 "date: %s" (Js.Date.toUTCString event.date);
   Js.log2 "access: %s"
     (match event.access with
-     | `Private -> "private (registration required)"
-     | `Public -> "public");
+     | `Private _ -> "private (registration required)"
+     | `Public {address} -> "public (location: `" ^ address ^ "`)");
   Js.log4 "host: %s <%s>%s"
     event.host.name event.host.email
     (match event.host.phone with None -> "" | Some p -> " (" ^ p ^ ")");
@@ -44,7 +44,7 @@ let add_event name email =
   in
   let new_event =
     {
-      Meetup_t.access = `Public;
+      Meetup_t.access = `Public {address = "Central Park";};
       name = "OCaml/Reason Meetup!";
       host;
       date = Js.Date.make ();

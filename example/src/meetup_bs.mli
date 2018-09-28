@@ -1,6 +1,10 @@
 (* Auto-generated from "meetup.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
 
+type publ = Meetup_t.publ = { address: string }
+
+type priv = Meetup_t.priv = { password: string; secret: bool }
+
 type person = Meetup_t.person = {
   name: string;
   email: string;
@@ -20,6 +24,14 @@ type event = Meetup_t.event = {
 }
 
 type events = Meetup_t.events
+
+val read_publ :  publ Atdgen_codec_runtime.Decode.t
+
+val write_publ :  publ Atdgen_codec_runtime.Encode.t
+
+val read_priv :  priv Atdgen_codec_runtime.Decode.t
+
+val write_priv :  priv Atdgen_codec_runtime.Encode.t
 
 val read_person :  person Atdgen_codec_runtime.Decode.t
 
