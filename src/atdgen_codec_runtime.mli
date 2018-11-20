@@ -8,6 +8,44 @@ module Json : sig
 
 end
 
+(** Module signature required of any json adapter.
+    For example, an ATD annotation
+    [<json
+      adapter.ocaml="Atdgen_codec_runtime.Json.adapter.Type_field"]
+    refers to the OCaml module
+    [Atdgen_codec_runtime.Json_adapter.Type_field].
+*)
+module Json_adapter: sig
+
+  module type S = sig
+    (** Convert a real json tree into an atd-compliant form. *)
+    val normalize : Json.t -> Json.t
+
+    (** Convert an atd-compliant json tree into a real json tree. *)
+    val restore : Json.t -> Json.t
+  end
+
+  module Type_field : sig
+    module type Param = sig
+      val type_field_name : string
+    end
+
+    (** Default parameters, using [type_field_name = "type"]. *)
+    module Default_param : Param
+
+    (** Default adapter assuming a ["type"] field. *)
+    include S
+
+    (** Functor, allowing the use of a custom parameter:
+      {[
+      module Kind_field = Type_field.Make (struct type_field_name = "kind" end)
+      ]}
+    *)
+    module Make (Param : Param) : S
+  end
+
+end
+
 module Encode : sig
 
   type 'a t = 'a -> Js.Json.t
@@ -48,6 +86,8 @@ module Encode : sig
   val nullable : 'a t -> 'a option t
 
   val option_as_constr : 'a t -> 'a option t
+
+  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
 
 end
 
@@ -96,5 +136,7 @@ module Decode : sig
   val nullable : 'a t -> 'a option t
 
   val option_as_constr : 'a t -> 'a option t
+
+  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
 
 end

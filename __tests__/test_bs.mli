@@ -35,6 +35,12 @@ type r = Test_t.r = { a: int; b: string }
 
 type n = Test_t.n
 
+type b = Test_t.b = { thing: int }
+
+type a = Test_t.a = { thing: string; other_thing: bool }
+
+type adapted = Test_t.adapted
+
 val read_recurse :  recurse Atdgen_codec_runtime.Decode.t
 
 val write_recurse :  recurse Atdgen_codec_runtime.Encode.t
@@ -94,4 +100,16 @@ val write_r :  r Atdgen_codec_runtime.Encode.t
 val read_n :  n Atdgen_codec_runtime.Decode.t
 
 val write_n :  n Atdgen_codec_runtime.Encode.t
+
+val read_b :  b Atdgen_codec_runtime.Decode.t
+
+val write_b :  b Atdgen_codec_runtime.Encode.t
+
+val read_a :  a Atdgen_codec_runtime.Decode.t
+
+val write_a :  a Atdgen_codec_runtime.Encode.t
+
+val read_adapted :  adapted Atdgen_codec_runtime.Decode.t
+
+val write_adapted :  adapted Atdgen_codec_runtime.Encode.t
 

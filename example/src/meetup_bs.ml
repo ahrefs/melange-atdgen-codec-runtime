@@ -1,6 +1,10 @@
 (* Auto-generated from "meetup.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
 
+type publ = Meetup_t.publ = { address: string }
+
+type priv = Meetup_t.priv = { password: string; secret: bool }
+
 type person = Meetup_t.person = {
   name: string;
   email: string;
@@ -21,6 +25,77 @@ type event = Meetup_t.event = {
 
 type events = Meetup_t.events
 
+let write_publ = (
+  Atdgen_codec_runtime.Encode.make (fun (t : publ) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            Atdgen_codec_runtime.Encode.string
+            )
+          ~name:"address"
+          t.address
+      ]
+    )
+  )
+)
+let read_publ = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          address =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.string
+              |> Atdgen_codec_runtime.Decode.field "address"
+            ) json;
+      } : publ)
+    )
+  )
+)
+let write_priv = (
+  Atdgen_codec_runtime.Encode.make (fun (t : priv) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            Atdgen_codec_runtime.Encode.string
+            )
+          ~name:"password"
+          t.password
+        ;
+          Atdgen_codec_runtime.Encode.field
+            (
+            Atdgen_codec_runtime.Encode.bool
+            )
+          ~name:"secret"
+          t.secret
+      ]
+    )
+  )
+)
+let read_priv = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          password =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.string
+              |> Atdgen_codec_runtime.Decode.field "password"
+            ) json;
+          secret =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.bool
+              |> Atdgen_codec_runtime.Decode.field "secret"
+            ) json;
+      } : priv)
+    )
+  )
+)
 let write__2 = (
   Atdgen_codec_runtime.Encode.nullable (
     Atdgen_codec_runtime.Encode.string
@@ -102,28 +177,42 @@ let read_date = (
   read__1
 )
 let write_access = (
-  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
-    | `Private ->
-    Atdgen_codec_runtime.Encode.constr0 "Private"
-    | `Public ->
-    Atdgen_codec_runtime.Encode.constr0 "Public"
+  Atdgen_codec_runtime.Encode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.restore (
+    Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+      | `Private x ->
+      Atdgen_codec_runtime.Encode.constr1 "Private" (
+        write_priv
+      ) x
+      | `Public x ->
+      Atdgen_codec_runtime.Encode.constr1 "Public" (
+        write_publ
+      ) x
+    )
   )
 )
 let read_access = (
-  Atdgen_codec_runtime.Decode.enum
-  [
-      (
-      "Private"
-      ,
-        `Single (`Private)
-      )
-    ;
-      (
-      "Public"
-      ,
-        `Single (`Public)
-      )
-  ]
+  Atdgen_codec_runtime.Decode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.normalize (
+    Atdgen_codec_runtime.Decode.enum
+    [
+        (
+        "Private"
+        ,
+          `Decode (
+          read_priv
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`Private x) : _))
+          )
+        )
+      ;
+        (
+        "Public"
+        ,
+          `Decode (
+          read_publ
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`Public x) : _))
+          )
+        )
+    ]
+  )
 )
 let write__3 = (
   Atdgen_codec_runtime.Encode.list (

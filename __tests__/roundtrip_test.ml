@@ -79,4 +79,14 @@ let () =
       ~write:Test_bs.write_rec_list
       ~read:Test_bs.read_rec_list
       ~data:(`List [`Bool;`Bool;`List [`Bool]; `List []]);
+    run_test
+      ~name:"adapter variant 1"
+      ~write:Test_bs.write_adapted
+      ~read:Test_bs.read_adapted
+      ~data:Test_t.(`A {thing = "thing"; other_thing = false;});
+    run_test
+      ~name:"adapter variant 2"
+      ~write:Test_bs.write_adapted
+      ~read:Test_bs.read_adapted
+      ~data:Test_t.(`B {thing = 1;});
   )

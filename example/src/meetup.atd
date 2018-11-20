@@ -1,6 +1,18 @@
 (* This is a comment. Same syntax as in ocaml. *)
 
-type access = [ Private | Public ]
+type access = [
+  | Private of priv
+  | Public of publ
+] <json adapter.ocaml="Atdgen_codec_runtime.Json_adapter.Type_field">
+
+type priv = {
+  password: string;
+  secret: bool;
+}
+
+type publ = {
+  address: string;
+}
 
 type date = float wrap <ocaml module="Js.Date" wrap="Js.Date.fromFloat" unwrap="Js.Date.valueOf">
 
