@@ -59,5 +59,24 @@ let () =
       ~name:"int64"
       ~write:Test_bs.write_int64
       ~read:Test_bs.read_int64
-      ~data:3L
+      ~data:3L;
+    run_test
+      ~name:"recurse"
+      ~write:Test_bs.write_recurse
+      ~read:Test_bs.read_recurse
+      ~data:{Test_t.recurse_items = [{ recurse_items = []}]};
+    run_test
+      ~name:"mutual recurse"
+      ~write:Test_bs.write_mutual_recurse1
+      ~read:Test_bs.read_mutual_recurse1
+      ~data:(
+        let rec mutual_recurse1 = { Test_t.mutual_recurse2; }
+        and mutual_recurse2 = [{ Test_t.mutual_recurse1 = [] }]
+        in mutual_recurse1
+      );
+    run_test
+      ~name:"rec list"
+      ~write:Test_bs.write_rec_list
+      ~read:Test_bs.read_rec_list
+      ~data:(`List [`Bool;`Bool;`List [`Bool]; `List []]);
   )

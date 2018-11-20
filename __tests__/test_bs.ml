@@ -1,7 +1,287 @@
 (* Auto-generated from "test.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
-open Test_t
 
+type recurse = Test_t.recurse = { recurse_items: recurse list }
+
+type rec_option = Test_t.rec_option
+
+type rec_list = Test_t.rec_list
+
+type mutual_recurse1 = Test_t.mutual_recurse1 = {
+  mutual_recurse2: mutual_recurse2 list
+}
+
+and mutual_recurse2 = Test_t.mutual_recurse2 = {
+  mutual_recurse1: mutual_recurse1 list
+}
+
+type container = Test_t.container = { id: string; children: container list }
+
+type vp = Test_t.vp
+
+type vpl = Test_t.vpl
+
+type v = Test_t.v =  A of int | B of string 
+
+type vl = Test_t.vl
+
+type t = Test_t.t
+
+type int64 = Test_t.int64
+
+type ro = Test_t.ro = { c: string; o: int64 option }
+
+type r = Test_t.r = { a: int; b: string }
+
+type n = Test_t.n
+
+let rec write__9 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_rec_list
+  )
+) js
+and write_rec_list js = (
+  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+    | `Bool ->
+    Atdgen_codec_runtime.Encode.constr0 "Bool"
+    | `List x ->
+    Atdgen_codec_runtime.Encode.constr1 "List" (
+      write__9
+    ) x
+  )
+) js
+let rec read__9 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_rec_list
+  )
+) js
+and read_rec_list js = (
+  Atdgen_codec_runtime.Decode.enum
+  [
+      (
+      "Bool"
+      ,
+        `Single (`Bool)
+      )
+    ;
+      (
+      "List"
+      ,
+        `Decode (
+        read__9
+        |> Atdgen_codec_runtime.Decode.map (fun x -> ((`List x) : _))
+        )
+      )
+  ]
+) js
+let rec write__7 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_mutual_recurse2
+  )
+) js
+and write__8 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_mutual_recurse1
+  )
+) js
+and write_mutual_recurse1 js = (
+  Atdgen_codec_runtime.Encode.make (fun (t : mutual_recurse1) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            write__7
+            )
+          ~name:"mutual_recurse2"
+          t.mutual_recurse2
+      ]
+    )
+  )
+) js
+and write_mutual_recurse2 js = (
+  Atdgen_codec_runtime.Encode.make (fun (t : mutual_recurse2) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            write__8
+            )
+          ~name:"mutual_recurse1"
+          t.mutual_recurse1
+      ]
+    )
+  )
+) js
+let rec read__7 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_mutual_recurse2
+  )
+) js
+and read__8 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_mutual_recurse1
+  )
+) js
+and read_mutual_recurse1 js = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          mutual_recurse2 =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              read__7
+              |> Atdgen_codec_runtime.Decode.field "mutual_recurse2"
+            ) json;
+      } : mutual_recurse1)
+    )
+  )
+) js
+and read_mutual_recurse2 js = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          mutual_recurse1 =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              read__8
+              |> Atdgen_codec_runtime.Decode.field "mutual_recurse1"
+            ) json;
+      } : mutual_recurse2)
+    )
+  )
+) js
+let rec write__6 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_recurse
+  )
+) js
+and write_recurse js = (
+  Atdgen_codec_runtime.Encode.make (fun (t : recurse) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            write__6
+            )
+          ~name:"recurse_items"
+          t.recurse_items
+      ]
+    )
+  )
+) js
+let rec read__6 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_recurse
+  )
+) js
+and read_recurse js = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          recurse_items =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              read__6
+              |> Atdgen_codec_runtime.Decode.field "recurse_items"
+            ) json;
+      } : recurse)
+    )
+  )
+) js
+let rec write__5 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_container
+  )
+) js
+and write_container js = (
+  Atdgen_codec_runtime.Encode.make (fun (t : container) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            Atdgen_codec_runtime.Encode.string
+            )
+          ~name:"id"
+          t.id
+        ;
+          Atdgen_codec_runtime.Encode.field
+            (
+            write__5
+            )
+          ~name:"children"
+          t.children
+      ]
+    )
+  )
+) js
+let rec read__5 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_container
+  )
+) js
+and read_container js = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          id =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.string
+              |> Atdgen_codec_runtime.Decode.field "id"
+            ) json;
+          children =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              read__5
+              |> Atdgen_codec_runtime.Decode.field "children"
+            ) json;
+      } : container)
+    )
+  )
+) js
+let rec write__10 js = (
+  Atdgen_codec_runtime.Encode.option_as_constr (
+    write_rec_option
+  )
+) js
+and write_rec_option js = (
+  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+    | `Bool ->
+    Atdgen_codec_runtime.Encode.constr0 "Bool"
+    | `Nullable x ->
+    Atdgen_codec_runtime.Encode.constr1 "Nullable" (
+      write__10
+    ) x
+  )
+) js
+let rec read__10 js = (
+  Atdgen_codec_runtime.Decode.option_as_constr (
+    read_rec_option
+  )
+) js
+and read_rec_option js = (
+  Atdgen_codec_runtime.Decode.enum
+  [
+      (
+      "Bool"
+      ,
+        `Single (`Bool)
+      )
+    ;
+      (
+      "Nullable"
+      ,
+        `Decode (
+        read__10
+        |> Atdgen_codec_runtime.Decode.map (fun x -> ((`Nullable x) : _))
+        )
+      )
+  ]
+) js
 let write_vp = (
   Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
     | `A x ->

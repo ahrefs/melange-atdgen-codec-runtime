@@ -1,6 +1,18 @@
 (* Auto-generated from "test.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
 
+type recurse = { recurse_items: recurse list }
+
+type rec_option = [ `Bool | `Nullable of rec_option option ]
+
+type rec_list = [ `Bool | `List of rec_list list ]
+
+type mutual_recurse1 = { mutual_recurse2: mutual_recurse2 list }
+
+and mutual_recurse2 = { mutual_recurse1: mutual_recurse1 list }
+
+type container = { id: string; children: container list }
+
 type vp = [ `A of int | `B of string ]
 
 type vpl = vp list

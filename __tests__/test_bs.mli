@@ -1,6 +1,63 @@
 (* Auto-generated from "test.atd" *)
               [@@@ocaml.warning "-27-32-35-39"]
-open Test_t
+
+type recurse = Test_t.recurse = { recurse_items: recurse list }
+
+type rec_option = Test_t.rec_option
+
+type rec_list = Test_t.rec_list
+
+type mutual_recurse1 = Test_t.mutual_recurse1 = {
+  mutual_recurse2: mutual_recurse2 list
+}
+
+and mutual_recurse2 = Test_t.mutual_recurse2 = {
+  mutual_recurse1: mutual_recurse1 list
+}
+
+type container = Test_t.container = { id: string; children: container list }
+
+type vp = Test_t.vp
+
+type vpl = Test_t.vpl
+
+type v = Test_t.v =  A of int | B of string 
+
+type vl = Test_t.vl
+
+type t = Test_t.t
+
+type int64 = Test_t.int64
+
+type ro = Test_t.ro = { c: string; o: int64 option }
+
+type r = Test_t.r = { a: int; b: string }
+
+type n = Test_t.n
+
+val read_recurse :  recurse Atdgen_codec_runtime.Decode.t
+
+val write_recurse :  recurse Atdgen_codec_runtime.Encode.t
+
+val read_rec_option :  rec_option Atdgen_codec_runtime.Decode.t
+
+val write_rec_option :  rec_option Atdgen_codec_runtime.Encode.t
+
+val read_rec_list :  rec_list Atdgen_codec_runtime.Decode.t
+
+val write_rec_list :  rec_list Atdgen_codec_runtime.Encode.t
+
+val read_mutual_recurse1 :  mutual_recurse1 Atdgen_codec_runtime.Decode.t
+
+val write_mutual_recurse1 :  mutual_recurse1 Atdgen_codec_runtime.Encode.t
+
+val read_mutual_recurse2 :  mutual_recurse2 Atdgen_codec_runtime.Decode.t
+
+val write_mutual_recurse2 :  mutual_recurse2 Atdgen_codec_runtime.Encode.t
+
+val read_container :  container Atdgen_codec_runtime.Decode.t
+
+val write_container :  container Atdgen_codec_runtime.Encode.t
 
 val read_vp :  vp Atdgen_codec_runtime.Decode.t
 
