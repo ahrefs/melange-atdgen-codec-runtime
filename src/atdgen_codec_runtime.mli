@@ -10,7 +10,7 @@ end
 
 module Encode : sig
 
-  type 'a t = 'a Json_encode.encoder
+  type 'a t = 'a -> Js.Json.t
 
   val make : ('a -> Json.t) -> 'a t
 
@@ -53,7 +53,7 @@ end
 
 module Decode : sig
 
-  type 'a t = 'a Json_decode.decoder
+  type 'a t = Js.Json.t -> 'a
 
   val make : (Json.t -> 'a) -> 'a t
 
