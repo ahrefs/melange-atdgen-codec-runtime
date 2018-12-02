@@ -7,7 +7,9 @@ provided by bucklescript and combinators of
 
 The support of bucklescript in atdgen has not been released
 yet. atdgen must be installed from the git master branch to have the
-`-bs` option.
+`-bs` option. The version 1.1.0 of bs-atdgen-codec-runtime is known to
+work with the version [`8c08659`](https://github.com/mjambon/atd/tree/8c08659c5858ef1d09d666bbd4815a2f6c48bde0)
+of atdgen.
 
 ## Installation
 
