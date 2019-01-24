@@ -62,6 +62,7 @@ module Encode : sig
   val char : char t
 
   val list : 'a t -> 'a list t
+  val array : 'a t -> 'a array t
 
   val int32 : int32 t
   val int64 : int64 t
