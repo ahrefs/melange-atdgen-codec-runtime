@@ -82,6 +82,7 @@ module Encode = struct
   type field = F : 'a field_spec -> field
 
   let list encode l =
+    l |> Array.of_list |> array
     l |> Array.of_list
       |> Array.map encode
       |> jsonArray
