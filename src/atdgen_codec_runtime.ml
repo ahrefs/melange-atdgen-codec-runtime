@@ -82,7 +82,7 @@ module Encode = struct
   type field = F : 'a field_spec -> field
 
   let list encode l =
-    l |> Array.of_list |> jsonArray
+    l |> Array.of_list |> array
 
   let field ?default encode ~name data =
     F (Required (
