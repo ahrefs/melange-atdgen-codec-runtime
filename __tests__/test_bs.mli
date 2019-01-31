@@ -37,6 +37,8 @@ type n = Test_t.n
 
 type b = Test_t.b = { thing: int }
 
+type an_array = Test_t.an_array
+
 type a = Test_t.a = { thing: string; other_thing: bool }
 
 type adapted = Test_t.adapted
@@ -104,6 +106,10 @@ val write_n :  n Atdgen_codec_runtime.Encode.t
 val read_b :  b Atdgen_codec_runtime.Decode.t
 
 val write_b :  b Atdgen_codec_runtime.Encode.t
+
+val read_an_array :  an_array Atdgen_codec_runtime.Decode.t
+
+val write_an_array :  an_array Atdgen_codec_runtime.Encode.t
 
 val read_a :  a Atdgen_codec_runtime.Decode.t
 

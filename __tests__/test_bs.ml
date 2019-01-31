@@ -37,6 +37,8 @@ type n = Test_t.n
 
 type b = Test_t.b = { thing: int }
 
+type an_array = Test_t.an_array
+
 type a = Test_t.a = { thing: string; other_thing: bool }
 
 type adapted = Test_t.adapted
@@ -556,6 +558,22 @@ let read_b = (
       } : b)
     )
   )
+)
+let write__11 = (
+  Atdgen_codec_runtime.Encode.array (
+    Atdgen_codec_runtime.Encode.int
+  )
+)
+let read__11 = (
+  Atdgen_codec_runtime.Decode.array (
+    Atdgen_codec_runtime.Decode.int
+  )
+)
+let write_an_array = (
+  write__11
+)
+let read_an_array = (
+  read__11
 )
 let write_a = (
   Atdgen_codec_runtime.Encode.make (fun (t : a) ->

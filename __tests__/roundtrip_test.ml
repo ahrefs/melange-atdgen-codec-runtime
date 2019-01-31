@@ -89,4 +89,9 @@ let () =
       ~write:Test_bs.write_adapted
       ~read:Test_bs.read_adapted
       ~data:Test_t.(`B {thing = 1;});
+    run_test
+      ~name:"int array"
+      ~write:Test_bs.write_an_array
+      ~read:Test_bs.read_an_array
+      ~data:[| 1;2;3;4;5 |]
   )

@@ -64,3 +64,5 @@ type a = {
 type b = {
   thing: int;
 }
+
+type an_array = int list <ocaml repr="array">
