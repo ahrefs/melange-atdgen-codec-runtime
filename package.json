@@ -38,6 +38,6 @@
     "bs-platform": "^5.0.6"
   },
   "dependencies": {
-    "@glennsl/bs-json": "^3.0.0"
+    "@glennsl/bs-json": "^4.0.0"
   }
 }
