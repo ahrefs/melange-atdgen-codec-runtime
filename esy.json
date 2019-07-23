@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@opam/atd": "*",
+    "@opam/atdgen": "*"
+  },
+  "resolutions": {
+    "@opam/atd": "github:mjambon/atd:atd.opam#8089d9e",
+    "@opam/atdgen": "github:mjambon/atd:atdgen.opam#8089d9e"
+  },
+  "devDependencies": {
+    "ocaml": "~4.7.1"
+  }
+}
