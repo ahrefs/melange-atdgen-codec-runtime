@@ -35,7 +35,8 @@ type r = Test_t.r = { a: int; b: string }
 
 type optional_field = Test_t.optional_field = {
   with_default: int;
-  no_default: int option
+  no_default: int option;
+  no_default_nullable: int option
 }
 
 type n = Test_t.n

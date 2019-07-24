@@ -29,7 +29,11 @@ type ro = { c: string; o: int64 option }
 
 type r = { a: int; b: string }
 
-type optional_field = { with_default: int; no_default: int option }
+type optional_field = {
+  with_default: int;
+  no_default: int option;
+  no_default_nullable: int option
+}
 
 type n = int option
 

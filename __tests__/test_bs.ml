@@ -35,7 +35,8 @@ type r = Test_t.r = { a: int; b: string }
 
 type optional_field = Test_t.optional_field = {
   with_default: int;
-  no_default: int option
+  no_default: int option;
+  no_default_nullable: int option
 }
 
 type n = Test_t.n
@@ -519,6 +520,16 @@ let read_r = (
     )
   )
 )
+let write__5 = (
+  Atdgen_codec_runtime.Encode.nullable (
+    Atdgen_codec_runtime.Encode.int
+  )
+)
+let read__5 = (
+  Atdgen_codec_runtime.Decode.nullable (
+    Atdgen_codec_runtime.Decode.int
+  )
+)
 let write__4 = (
   Atdgen_codec_runtime.Encode.option_as_constr (
     Atdgen_codec_runtime.Encode.int
@@ -547,6 +558,13 @@ let write_optional_field = (
             )
           ~name:"no_default"
           t.no_default
+        ;
+          Atdgen_codec_runtime.Encode.field_o
+            (
+            Atdgen_codec_runtime.Encode.int
+            )
+          ~name:"no_default_nullable"
+          t.no_default_nullable
       ]
     )
   )
@@ -567,18 +585,14 @@ let read_optional_field = (
               Atdgen_codec_runtime.Decode.int
               |> Atdgen_codec_runtime.Decode.fieldOptional "no_default"
             ) json;
+          no_default_nullable =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.int
+              |> Atdgen_codec_runtime.Decode.fieldOptional "no_default_nullable"
+            ) json;
       } : optional_field)
     )
-  )
-)
-let write__5 = (
-  Atdgen_codec_runtime.Encode.nullable (
-    Atdgen_codec_runtime.Encode.int
-  )
-)
-let read__5 = (
-  Atdgen_codec_runtime.Decode.nullable (
-    Atdgen_codec_runtime.Decode.int
   )
 )
 let write_n = (

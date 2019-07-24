@@ -25,6 +25,11 @@ let () =
                               Expected string, got {},Expected array, got {},0. And the JSON \
                               being decoded: {}"));
 
+    test "missing field in record" (fun () ->
+      let j = Json.parseOrRaise {|{"o": 44}|} in
+      expect (fun () -> Atdgen_codec_runtime.Decode.decode Test_bs.read_ro j)
+      |> toThrowException (Json_decode.DecodeError "Expected field 'c'"));
+
     test "optional field with default: wrong type throws exception" (fun () ->
       let j = Json.parseOrRaise {|{"with_default": "not right"}|} in
       expect (fun () -> Atdgen_codec_runtime.Decode.decode Test_bs.read_optional_field j)

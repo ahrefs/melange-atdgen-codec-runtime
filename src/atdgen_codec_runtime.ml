@@ -173,10 +173,8 @@ struct
     else
       Some (decode json)
 
-  exception MissingFieldError of string
-
-  (* Define our own version of field which can raise MissingFieldError *)
-  let field key decode json =
+  (* Define our own version of field which returns None if key is not found *)
+  let custom_field key decode json =
     if
       Js.typeof json = "object" &&
       not (Js.Array.isArray json) &&
@@ -187,22 +185,23 @@ struct
       match Js.Dict.get dict key with
       | Some value -> begin
         try
-          decode value
+          Some (decode value)
         with
           DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'")
         end
-      | None ->
-        raise @@ MissingFieldError ({j|Expected field '$(key)'|j})
+      | None -> None
     end
     else
       raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
 
-  (* We don't use Json_decode.optional because it swallows exceptions *)
-  let sane_optional decode json = Some (decode json)
+  (* We don't use Json_decode.optional because it swallows exceptions.
+     See https://github.com/glennsl/bs-json/issues/23 *)
+  let custom_optional decode json = Some (decode json)
 
   let fieldOptional s f json =
-    try sane_optional (field s f) json
-    with MissingFieldError _ -> None
+    match custom_optional (custom_field s f) json with
+    | Some (Some v) -> Some v
+    | _ -> None
 
   let fieldDefault s default f =
     fieldOptional s f

@@ -98,5 +98,5 @@ let () =
       ~name:"record with optional fields"
       ~write:Test_bs.write_optional_field
       ~read:Test_bs.read_optional_field
-      ~data:{with_default = 1; no_default = None};
+      ~data:{with_default = 1; no_default = None; no_default_nullable = Some 11};
   )
