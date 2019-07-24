@@ -33,6 +33,11 @@ type ro = Test_t.ro = { c: string; o: int64 option }
 
 type r = Test_t.r = { a: int; b: string }
 
+type optional_field = Test_t.optional_field = {
+  with_default: int;
+  no_default: int option
+}
+
 type n = Test_t.n
 
 type b = Test_t.b = { thing: int }
@@ -43,51 +48,12 @@ type a = Test_t.a = { thing: string; other_thing: bool }
 
 type adapted = Test_t.adapted
 
-let rec write__9 js = (
-  Atdgen_codec_runtime.Encode.list (
-    write_rec_list
-  )
-) js
-and write_rec_list js = (
-  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
-    | `Bool ->
-    Atdgen_codec_runtime.Encode.constr0 "Bool"
-    | `List x ->
-    Atdgen_codec_runtime.Encode.constr1 "List" (
-      write__9
-    ) x
-  )
-) js
-let rec read__9 js = (
-  Atdgen_codec_runtime.Decode.list (
-    read_rec_list
-  )
-) js
-and read_rec_list js = (
-  Atdgen_codec_runtime.Decode.enum
-  [
-      (
-      "Bool"
-      ,
-        `Single (`Bool)
-      )
-    ;
-      (
-      "List"
-      ,
-        `Decode (
-        read__9
-        |> Atdgen_codec_runtime.Decode.map (fun x -> ((`List x) : _))
-        )
-      )
-  ]
-) js
-let rec write__7 js = (
+let rec write__8 js = (
   Atdgen_codec_runtime.Encode.list (
     write_mutual_recurse2
   )
 ) js
-and write__8 js = (
+and write__9 js = (
   Atdgen_codec_runtime.Encode.list (
     write_mutual_recurse1
   )
@@ -99,7 +65,7 @@ and write_mutual_recurse1 js = (
       [
           Atdgen_codec_runtime.Encode.field
             (
-            write__7
+            write__8
             )
           ~name:"mutual_recurse2"
           t.mutual_recurse2
@@ -114,7 +80,7 @@ and write_mutual_recurse2 js = (
       [
           Atdgen_codec_runtime.Encode.field
             (
-            write__8
+            write__9
             )
           ~name:"mutual_recurse1"
           t.mutual_recurse1
@@ -122,12 +88,12 @@ and write_mutual_recurse2 js = (
     )
   )
 ) js
-let rec read__7 js = (
+let rec read__8 js = (
   Atdgen_codec_runtime.Decode.list (
     read_mutual_recurse2
   )
 ) js
-and read__8 js = (
+and read__9 js = (
   Atdgen_codec_runtime.Decode.list (
     read_mutual_recurse1
   )
@@ -139,7 +105,7 @@ and read_mutual_recurse1 js = (
           mutual_recurse2 =
             Atdgen_codec_runtime.Decode.decode
             (
-              read__7
+              read__8
               |> Atdgen_codec_runtime.Decode.field "mutual_recurse2"
             ) json;
       } : mutual_recurse1)
@@ -153,14 +119,14 @@ and read_mutual_recurse2 js = (
           mutual_recurse1 =
             Atdgen_codec_runtime.Decode.decode
             (
-              read__8
+              read__9
               |> Atdgen_codec_runtime.Decode.field "mutual_recurse1"
             ) json;
       } : mutual_recurse2)
     )
   )
 ) js
-let rec write__6 js = (
+let rec write__7 js = (
   Atdgen_codec_runtime.Encode.list (
     write_recurse
   )
@@ -172,7 +138,7 @@ and write_recurse js = (
       [
           Atdgen_codec_runtime.Encode.field
             (
-            write__6
+            write__7
             )
           ~name:"recurse_items"
           t.recurse_items
@@ -180,7 +146,7 @@ and write_recurse js = (
     )
   )
 ) js
-let rec read__6 js = (
+let rec read__7 js = (
   Atdgen_codec_runtime.Decode.list (
     read_recurse
   )
@@ -192,14 +158,14 @@ and read_recurse js = (
           recurse_items =
             Atdgen_codec_runtime.Decode.decode
             (
-              read__6
+              read__7
               |> Atdgen_codec_runtime.Decode.field "recurse_items"
             ) json;
       } : recurse)
     )
   )
 ) js
-let rec write__5 js = (
+let rec write__6 js = (
   Atdgen_codec_runtime.Encode.list (
     write_container
   )
@@ -218,7 +184,7 @@ and write_container js = (
         ;
           Atdgen_codec_runtime.Encode.field
             (
-            write__5
+            write__6
             )
           ~name:"children"
           t.children
@@ -226,7 +192,7 @@ and write_container js = (
     )
   )
 ) js
-let rec read__5 js = (
+let rec read__6 js = (
   Atdgen_codec_runtime.Decode.list (
     read_container
   )
@@ -244,14 +210,14 @@ and read_container js = (
           children =
             Atdgen_codec_runtime.Decode.decode
             (
-              read__5
+              read__6
               |> Atdgen_codec_runtime.Decode.field "children"
             ) json;
       } : container)
     )
   )
 ) js
-let rec write__10 js = (
+let rec write__11 js = (
   Atdgen_codec_runtime.Encode.option_as_constr (
     write_rec_option
   )
@@ -262,11 +228,11 @@ and write_rec_option js = (
     Atdgen_codec_runtime.Encode.constr0 "Bool"
     | `Nullable x ->
     Atdgen_codec_runtime.Encode.constr1 "Nullable" (
-      write__10
+      write__11
     ) x
   )
 ) js
-let rec read__10 js = (
+let rec read__11 js = (
   Atdgen_codec_runtime.Decode.option_as_constr (
     read_rec_option
   )
@@ -284,8 +250,47 @@ and read_rec_option js = (
       "Nullable"
       ,
         `Decode (
-        read__10
+        read__11
         |> Atdgen_codec_runtime.Decode.map (fun x -> ((`Nullable x) : _))
+        )
+      )
+  ]
+) js
+let rec write__10 js = (
+  Atdgen_codec_runtime.Encode.list (
+    write_rec_list
+  )
+) js
+and write_rec_list js = (
+  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+    | `Bool ->
+    Atdgen_codec_runtime.Encode.constr0 "Bool"
+    | `List x ->
+    Atdgen_codec_runtime.Encode.constr1 "List" (
+      write__10
+    ) x
+  )
+) js
+let rec read__10 js = (
+  Atdgen_codec_runtime.Decode.list (
+    read_rec_list
+  )
+) js
+and read_rec_list js = (
+  Atdgen_codec_runtime.Decode.enum
+  [
+      (
+      "Bool"
+      ,
+        `Single (`Bool)
+      )
+    ;
+      (
+      "List"
+      ,
+        `Decode (
+        read__10
+        |> Atdgen_codec_runtime.Decode.map (fun x -> ((`List x) : _))
         )
       )
   ]
@@ -515,20 +520,72 @@ let read_r = (
   )
 )
 let write__4 = (
-  Atdgen_codec_runtime.Encode.nullable (
+  Atdgen_codec_runtime.Encode.option_as_constr (
     Atdgen_codec_runtime.Encode.int
   )
 )
 let read__4 = (
+  Atdgen_codec_runtime.Decode.option_as_constr (
+    Atdgen_codec_runtime.Decode.int
+  )
+)
+let write_optional_field = (
+  Atdgen_codec_runtime.Encode.make (fun (t : optional_field) ->
+    (
+    Atdgen_codec_runtime.Encode.obj
+      [
+          Atdgen_codec_runtime.Encode.field
+            (
+            Atdgen_codec_runtime.Encode.int
+            )
+          ~name:"with_default"
+          t.with_default
+        ;
+          Atdgen_codec_runtime.Encode.field_o
+            (
+            Atdgen_codec_runtime.Encode.int
+            )
+          ~name:"no_default"
+          t.no_default
+      ]
+    )
+  )
+)
+let read_optional_field = (
+  Atdgen_codec_runtime.Decode.make (fun json ->
+    (
+      ({
+          with_default =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.int
+              |> Atdgen_codec_runtime.Decode.fieldDefault "with_default" 9
+            ) json;
+          no_default =
+            Atdgen_codec_runtime.Decode.decode
+            (
+              Atdgen_codec_runtime.Decode.int
+              |> Atdgen_codec_runtime.Decode.fieldOptional "no_default"
+            ) json;
+      } : optional_field)
+    )
+  )
+)
+let write__5 = (
+  Atdgen_codec_runtime.Encode.nullable (
+    Atdgen_codec_runtime.Encode.int
+  )
+)
+let read__5 = (
   Atdgen_codec_runtime.Decode.nullable (
     Atdgen_codec_runtime.Decode.int
   )
 )
 let write_n = (
-  write__4
+  write__5
 )
 let read_n = (
-  read__4
+  read__5
 )
 let write_b = (
   Atdgen_codec_runtime.Encode.make (fun (t : b) ->
@@ -559,21 +616,21 @@ let read_b = (
     )
   )
 )
-let write__11 = (
+let write__12 = (
   Atdgen_codec_runtime.Encode.array (
     Atdgen_codec_runtime.Encode.int
   )
 )
-let read__11 = (
+let read__12 = (
   Atdgen_codec_runtime.Decode.array (
     Atdgen_codec_runtime.Decode.int
   )
 )
 let write_an_array = (
-  write__11
+  write__12
 )
 let read_an_array = (
-  read__11
+  read__12
 )
 let write_a = (
   Atdgen_codec_runtime.Encode.make (fun (t : a) ->

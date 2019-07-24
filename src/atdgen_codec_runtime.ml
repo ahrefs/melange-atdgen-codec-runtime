@@ -173,7 +173,36 @@ struct
     else
       Some (decode json)
 
-  let fieldOptional s f = optional (field s f)
+  exception MissingFieldError of string
+
+  (* Define our own version of field which can raise MissingFieldError *)
+  let field key decode json =
+    if
+      Js.typeof json = "object" &&
+      not (Js.Array.isArray json) &&
+      not ((Obj.magic json : 'a Js.null) == Js.null)
+    then begin
+      let dict =
+        (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
+      match Js.Dict.get dict key with
+      | Some value -> begin
+        try
+          decode value
+        with
+          DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'")
+        end
+      | None ->
+        raise @@ MissingFieldError ({j|Expected field '$(key)'|j})
+    end
+    else
+      raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
+
+  (* We don't use Json_decode.optional because it swallows exceptions *)
+  let sane_optional decode json = Some (decode json)
+
+  let fieldOptional s f json =
+    try sane_optional (field s f) json
+    with MissingFieldError _ -> None
 
   let fieldDefault s default f =
     fieldOptional s f
