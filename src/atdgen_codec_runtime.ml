@@ -173,8 +173,8 @@ struct
     else
       Some (decode json)
 
-  (* Define our own version of field which returns None if key is not found *)
-  let custom_field key decode json =
+  (* Unlike Json_decode.field, this returns None if key is not found *)
+  let fieldOptional key decode json =
     if
       Js.typeof json = "object" &&
       not (Js.Array.isArray json) &&
@@ -183,25 +183,16 @@ struct
       let dict =
         (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
       match Js.Dict.get dict key with
+      | None -> None
       | Some value -> begin
         try
           Some (decode value)
         with
           DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'")
         end
-      | None -> None
     end
     else
       raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
-
-  (* We don't use Json_decode.optional because it swallows exceptions.
-     See https://github.com/glennsl/bs-json/issues/23 *)
-  let custom_optional decode json = Some (decode json)
-
-  let fieldOptional s f json =
-    match custom_optional (custom_field s f) json with
-    | Some (Some v) -> Some v
-    | _ -> None
 
   let fieldDefault s default f =
     fieldOptional s f
