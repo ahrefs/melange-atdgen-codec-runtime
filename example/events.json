@@ -1,0 +1,20 @@
+[
+  {
+    "guests": [
+      {
+        "email": "feihong@hoo.boy",
+        "name": "feihong"
+      }
+    ],
+    "date": 1563938269514,
+    "host": {
+      "email": "feihong@hoo.boy",
+      "name": "feihong"
+    },
+    "name": "OCaml/Reason Meetup!",
+    "access": {
+      "address": "Central Park",
+      "type": "Public"
+    }
+  }
+]

@@ -41,7 +41,7 @@ let () =
       ~read:Test_bs.read_vpl
       ~data:[`A 1; `B "s"];
     run_test
-      ~name:"tupple"
+      ~name:"tuple"
       ~write:Test_bs.write_t
       ~read:Test_bs.read_t
       ~data:(1, "s", 1.1);
@@ -93,5 +93,10 @@ let () =
       ~name:"int array"
       ~write:Test_bs.write_an_array
       ~read:Test_bs.read_an_array
-      ~data:[| 1;2;3;4;5 |]
+      ~data:[| 1;2;3;4;5 |];
+    run_test
+      ~name:"record with optional fields"
+      ~write:Test_bs.write_optional_field
+      ~read:Test_bs.read_optional_field
+      ~data:{with_default = 1; no_default = None; no_default_nullable = Some 11};
   )

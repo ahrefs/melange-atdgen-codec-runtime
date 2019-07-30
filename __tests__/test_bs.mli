@@ -33,6 +33,12 @@ type ro = Test_t.ro = { c: string; o: int64 option }
 
 type r = Test_t.r = { a: int; b: string }
 
+type optional_field = Test_t.optional_field = {
+  with_default: int;
+  no_default: int option;
+  no_default_nullable: int option
+}
+
 type n = Test_t.n
 
 type b = Test_t.b = { thing: int }
@@ -98,6 +104,10 @@ val write_ro :  ro Atdgen_codec_runtime.Encode.t
 val read_r :  r Atdgen_codec_runtime.Decode.t
 
 val write_r :  r Atdgen_codec_runtime.Encode.t
+
+val read_optional_field :  optional_field Atdgen_codec_runtime.Decode.t
+
+val write_optional_field :  optional_field Atdgen_codec_runtime.Encode.t
 
 val read_n :  n Atdgen_codec_runtime.Decode.t
 

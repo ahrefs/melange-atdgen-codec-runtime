@@ -29,6 +29,12 @@ type ro = {
   ?o: int64 option;
 }
 
+type optional_field = {
+  ~with_default <ocaml default="9">: int;
+  ?no_default: int option;
+  ?no_default_nullable: int nullable;
+}
+
 type t = (int * string * float)
 
 type n = int nullable

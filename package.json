@@ -28,10 +28,10 @@
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
     "test": "yarn build && yarn jest __tests__/*_test.bs.js",
-    "atdgen": "cd __tests__ && atdgen -t test.atd && atdgen -bs test.atd"
+    "atdgen": "cd __tests__ && esy atdgen -t test.atd && esy atdgen -bs test.atd"
   },
   "devDependencies": {
-    "@glennsl/bs-jest": "^0.4.3",
+    "@glennsl/bs-jest": "^0.4.8",
     "bs-platform": ">= 4.0.0"
   },
   "peerDependencies": {

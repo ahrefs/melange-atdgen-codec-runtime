@@ -173,7 +173,26 @@ struct
     else
       Some (decode json)
 
-  let fieldOptional s f = optional (field s f)
+  (* Unlike Json_decode.field, this returns None if key is not found *)
+  let fieldOptional key decode json =
+    if
+      Js.typeof json = "object" &&
+      not (Js.Array.isArray json) &&
+      not ((Obj.magic json : 'a Js.null) == Js.null)
+    then begin
+      let dict =
+        (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
+      match Js.Dict.get dict key with
+      | None -> None
+      | Some value -> begin
+        try
+          Some (decode value)
+        with
+          DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'")
+        end
+    end
+    else
+      raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
 
   let fieldDefault s default f =
     fieldOptional s f
