@@ -3,7 +3,7 @@
 
 
 "@ahrefs/bs-atdgen-codec-runtime@file:..":
-  version "1.4.1"
+  version "1.4.2"
   dependencies:
     "@glennsl/bs-json" ">=3.0.0 <5.0.0"
 
