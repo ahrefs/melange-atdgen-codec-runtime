@@ -35,7 +35,7 @@ module Json_adapter = struct
             begin match o |> Js.Json.classify with
               | JSONObject obj ->
                   Js.Dict.set obj type_field_name v;
-                  Json_encode.dict obj
+                  Json_encode.jsonDict obj
               | _ -> json
             end
         | _ -> json
