@@ -47,6 +47,8 @@ type an_array = Test_t.an_array
 
 type a = Test_t.a = { thing: string; other_thing: bool }
 
+type adapted_kind = Test_t.adapted_kind
+
 type adapted = Test_t.adapted
 
 val read_recurse :  recurse Atdgen_codec_runtime.Decode.t
@@ -124,6 +126,10 @@ val write_an_array :  an_array Atdgen_codec_runtime.Encode.t
 val read_a :  a Atdgen_codec_runtime.Decode.t
 
 val write_a :  a Atdgen_codec_runtime.Encode.t
+
+val read_adapted_kind :  adapted_kind Atdgen_codec_runtime.Decode.t
+
+val write_adapted_kind :  adapted_kind Atdgen_codec_runtime.Encode.t
 
 val read_adapted :  adapted Atdgen_codec_runtime.Decode.t
 

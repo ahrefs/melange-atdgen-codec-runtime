@@ -43,4 +43,6 @@ type an_array = int Atdgen_runtime.Util.ocaml_array
 
 type a = { thing: string; other_thing: bool }
 
+type adapted_kind = [ `A of a | `B of b ]
+
 type adapted = [ `A of a | `B of b ]

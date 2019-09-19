@@ -62,6 +62,11 @@ type adapted = [
   | B of b
 ] <json adapter.ocaml="Atdgen_codec_runtime.Json_adapter.Type_field">
 
+type adapted_kind = [
+  | A of a
+  | B of b
+] <json adapter.ocaml="Kind_field">
+
 type a = {
   thing: string;
   other_thing: bool;

@@ -38,7 +38,7 @@ module Json_adapter: sig
 
     (** Functor, allowing the use of a custom parameter:
       {[
-      module Kind_field = Type_field.Make (struct type_field_name = "kind" end)
+      module Kind_field = Type_field.Make (struct let type_field_name = "kind" end)
       ]}
     *)
     module Make (Param : Param) : S

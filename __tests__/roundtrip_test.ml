@@ -90,6 +90,16 @@ let () =
       ~read:Test_bs.read_adapted
       ~data:Test_t.(`B {thing = 1;});
     run_test
+      ~name:"adapter kind field - variant 1"
+      ~write:Test_bs.write_adapted_kind
+      ~read:Test_bs.read_adapted_kind
+      ~data:Test_t.(`A {thing = "thing"; other_thing = false;});
+    run_test
+      ~name:"adapter kind field - variant 2"
+      ~write:Test_bs.write_adapted_kind
+      ~read:Test_bs.read_adapted_kind
+      ~data:Test_t.(`B {thing = 1;});
+    run_test
       ~name:"int array"
       ~write:Test_bs.write_an_array
       ~read:Test_bs.read_an_array
