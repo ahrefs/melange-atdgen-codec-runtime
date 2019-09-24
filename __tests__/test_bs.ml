@@ -47,6 +47,8 @@ type an_array = Test_t.an_array
 
 type a = Test_t.a = { thing: string; other_thing: bool }
 
+type adapted_kind = Test_t.adapted_kind
+
 type adapted = Test_t.adapted
 
 let rec write__8 js = (
@@ -686,6 +688,44 @@ let read_a = (
             ) json;
       } : a)
     )
+  )
+)
+let write_adapted_kind = (
+  Atdgen_codec_runtime.Encode.adapter Kind_field.restore (
+    Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+      | `A x ->
+      Atdgen_codec_runtime.Encode.constr1 "A" (
+        write_a
+      ) x
+      | `B x ->
+      Atdgen_codec_runtime.Encode.constr1 "B" (
+        write_b
+      ) x
+    )
+  )
+)
+let read_adapted_kind = (
+  Atdgen_codec_runtime.Decode.adapter Kind_field.normalize (
+    Atdgen_codec_runtime.Decode.enum
+    [
+        (
+        "A"
+        ,
+          `Decode (
+          read_a
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`A x) : _))
+          )
+        )
+      ;
+        (
+        "B"
+        ,
+          `Decode (
+          read_b
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`B x) : _))
+          )
+        )
+    ]
   )
 )
 let write_adapted = (

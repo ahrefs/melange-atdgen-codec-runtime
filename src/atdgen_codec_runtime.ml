@@ -23,7 +23,7 @@ module Json_adapter = struct
 
       let normalize (json : Json.t) =
         let open Json_decode in
-        match json |> (at ["type"] string) with
+        match json |> (at [type_field_name] string) with
         | type_ ->
             let normalized: Json.t = Obj.magic (type_, json) in
             normalized
