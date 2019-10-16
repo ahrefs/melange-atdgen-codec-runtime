@@ -41,6 +41,10 @@ type b = { thing: int }
 
 type an_array = int Atdgen_runtime.Util.ocaml_array
 
+type adapted_scalar = [ `A of int | `B of string ]
+
+type adapted_list = [ `A of int list ]
+
 type a = { thing: string; other_thing: bool }
 
 type adapted_kind = [ `A of a | `B of b ]
