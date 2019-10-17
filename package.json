@@ -1,6 +1,6 @@
 {
   "name": "@ahrefs/bs-atdgen-codec-runtime",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "bucklescript runtime for atdgen",
   "main": "src/atdgen_codec_runtime.bs.js",
   "repository": "https://github.com/ahrefs/bs-atdgen-codec-runtime.git",
