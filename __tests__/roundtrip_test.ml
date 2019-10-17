@@ -109,4 +109,19 @@ let () =
       ~write:Test_bs.write_optional_field
       ~read:Test_bs.read_optional_field
       ~data:{with_default = 1; no_default = None; no_default_nullable = Some 11};
+    run_test
+      ~name:"adapter scalar"
+      ~write:Test_bs.write_adapted_scalar
+      ~read:Test_bs.read_adapted_scalar
+      ~data:(`A 1);
+    run_test
+      ~name:"adapter scalar - variant 2"
+      ~write:Test_bs.write_adapted_scalar
+      ~read:Test_bs.read_adapted_scalar
+      ~data:(`B "thing");
+    run_test
+      ~name:"adapter list"
+      ~write:Test_bs.write_adapted_list
+      ~read:Test_bs.read_adapted_list
+      ~data:(`A [1]);
   )

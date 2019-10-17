@@ -22,12 +22,15 @@ module Json_adapter = struct
       open Param
 
       let normalize (json : Json.t) =
-        let open Json_decode in
-        match json |> (at [type_field_name] string) with
-        | type_ ->
-            let normalized: Json.t = Obj.magic (type_, json) in
-            normalized
-        | exception Invalid_argument _ -> json
+        match json |> Js.Json.classify with
+          | JSONObject obj ->
+            begin match Js.Dict.get obj type_field_name with
+              | Some type_ ->
+                let normalized: Json.t = Obj.magic (type_, json) in
+                normalized
+              | None -> json
+            end
+          | _ -> json
 
       let restore json =
         match json |> Js.Json.classify with

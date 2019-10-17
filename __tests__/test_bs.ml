@@ -45,6 +45,10 @@ type b = Test_t.b = { thing: int }
 
 type an_array = Test_t.an_array
 
+type adapted_scalar = Test_t.adapted_scalar
+
+type adapted_list = Test_t.adapted_list
+
 type a = Test_t.a = { thing: string; other_thing: bool }
 
 type adapted_kind = Test_t.adapted_kind
@@ -632,21 +636,94 @@ let read_b = (
     )
   )
 )
-let write__12 = (
+let write__13 = (
   Atdgen_codec_runtime.Encode.array (
     Atdgen_codec_runtime.Encode.int
   )
 )
-let read__12 = (
+let read__13 = (
   Atdgen_codec_runtime.Decode.array (
     Atdgen_codec_runtime.Decode.int
   )
 )
 let write_an_array = (
-  write__12
+  write__13
 )
 let read_an_array = (
-  read__12
+  read__13
+)
+let write_adapted_scalar = (
+  Atdgen_codec_runtime.Encode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.restore (
+    Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+      | `A x ->
+      Atdgen_codec_runtime.Encode.constr1 "A" (
+        Atdgen_codec_runtime.Encode.int
+      ) x
+      | `B x ->
+      Atdgen_codec_runtime.Encode.constr1 "B" (
+        Atdgen_codec_runtime.Encode.string
+      ) x
+    )
+  )
+)
+let read_adapted_scalar = (
+  Atdgen_codec_runtime.Decode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.normalize (
+    Atdgen_codec_runtime.Decode.enum
+    [
+        (
+        "A"
+        ,
+          `Decode (
+          Atdgen_codec_runtime.Decode.int
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`A x) : _))
+          )
+        )
+      ;
+        (
+        "B"
+        ,
+          `Decode (
+          Atdgen_codec_runtime.Decode.string
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`B x) : _))
+          )
+        )
+    ]
+  )
+)
+let write__12 = (
+  Atdgen_codec_runtime.Encode.list (
+    Atdgen_codec_runtime.Encode.int
+  )
+)
+let read__12 = (
+  Atdgen_codec_runtime.Decode.list (
+    Atdgen_codec_runtime.Decode.int
+  )
+)
+let write_adapted_list = (
+  Atdgen_codec_runtime.Encode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.restore (
+    Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+      | `A x ->
+      Atdgen_codec_runtime.Encode.constr1 "A" (
+        write__12
+      ) x
+    )
+  )
+)
+let read_adapted_list = (
+  Atdgen_codec_runtime.Decode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.normalize (
+    Atdgen_codec_runtime.Decode.enum
+    [
+        (
+        "A"
+        ,
+          `Decode (
+          read__12
+          |> Atdgen_codec_runtime.Decode.map (fun x -> ((`A x) : _))
+          )
+        )
+    ]
+  )
 )
 let write_a = (
   Atdgen_codec_runtime.Encode.make (fun (t : a) ->

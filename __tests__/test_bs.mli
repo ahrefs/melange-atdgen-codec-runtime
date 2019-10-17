@@ -45,6 +45,10 @@ type b = Test_t.b = { thing: int }
 
 type an_array = Test_t.an_array
 
+type adapted_scalar = Test_t.adapted_scalar
+
+type adapted_list = Test_t.adapted_list
+
 type a = Test_t.a = { thing: string; other_thing: bool }
 
 type adapted_kind = Test_t.adapted_kind
@@ -122,6 +126,14 @@ val write_b :  b Atdgen_codec_runtime.Encode.t
 val read_an_array :  an_array Atdgen_codec_runtime.Decode.t
 
 val write_an_array :  an_array Atdgen_codec_runtime.Encode.t
+
+val read_adapted_scalar :  adapted_scalar Atdgen_codec_runtime.Decode.t
+
+val write_adapted_scalar :  adapted_scalar Atdgen_codec_runtime.Encode.t
+
+val read_adapted_list :  adapted_list Atdgen_codec_runtime.Decode.t
+
+val write_adapted_list :  adapted_list Atdgen_codec_runtime.Encode.t
 
 val read_a :  a Atdgen_codec_runtime.Decode.t
 
