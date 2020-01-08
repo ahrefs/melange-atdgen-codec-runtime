@@ -1,7 +1,11 @@
 {
   "dependencies": {
-    "@opam/atd": "^2.0.0",
-    "@opam/atdgen": "^2.0.0"
+    "@opam/atd": "*",
+    "@opam/atdgen": "*"
+  },
+  "resolutions": {
+    "@opam/atd": "github:ahrefs/atd:atd.opam#6a1f166",
+    "@opam/atdgen": "github:ahrefs/atd:atdgen.opam#6a1f166"
   },
   "devDependencies": {
     "ocaml": "~4.7.1"
