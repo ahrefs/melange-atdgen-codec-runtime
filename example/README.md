@@ -7,8 +7,8 @@ bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescri
 ## Compile the project
 
 ```bash
+esy
 yarn
-yarn atdgen # required only if src/meetup.atd has been modified
 yarn build
 ```
 
@@ -16,15 +16,15 @@ yarn build
 
 ```
 $ echo "[]" > events.json
-$ nodejs src/cli.bs.js add louis louis@nospam.com
-$ nodejs src/cli.bs.js print
+$ node src/cli.bs.js add louis louis@nospam.com
+$ node src/cli.bs.js print
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:13 GMT
 access: public
 host: louis <louis@nospam.com>
 guests: 1
-$ nodejs src/cli.bs.js add bob bob@nospam.com
-$ nodejs src/cli.bs.js print
+$ node src/cli.bs.js add bob bob@nospam.com
+$ node src/cli.bs.js print
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:16 GMT
 access: public
