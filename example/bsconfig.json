@@ -2,9 +2,29 @@
 {
   "name": "client",
   "version": "0.0.1",
+  "generators": [
+    {
+      "name": "atd_t",
+      "command": "esy atdgen -t $in"
+    },
+    {
+      "name": "atd_bs",
+      "command": "esy atdgen -bs $in"
+    }
+  ],
   "sources": {
     "dir" : "src",
-    "subdirs" : true
+    "subdirs" : true,
+    "generators": [
+      {
+        "name": "atd_t",
+        "edge": ["meetup_t.ml", "meetup_t.mli", ":", "meetup.atd"]
+      },
+      {
+        "name": "atd_bs",
+        "edge": ["meetup_bs.ml", "meetup_bs.mli", ":", "meetup.atd"]
+      }
+    ]
   },
   "package-specs": {
     "module": "commonjs",
