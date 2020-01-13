@@ -12,7 +12,7 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@ahrefs/bs-atdgen-codec-runtime"
+    "@jchavarri/bs-atdgen-codec-runtime"
   ],
   "warnings": {
     "error" : "+101"

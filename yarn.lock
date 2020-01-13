@@ -146,10 +146,12 @@
   dependencies:
     jest "^24.3.1"
 
-"@glennsl/bs-json@>=3.0.0 <5.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@glennsl/bs-json/-/bs-json-4.0.0.tgz#f057d0d1d84d614e27d8bbb67b64e6b6727f24b2"
-  integrity sha512-nunb6+cZcx7pyooh8i4froogXumOOiFb7rF3bz6E9X7b3Dc+3/HGwpnUjxciFN8eQL4QC+MskzG1tG+Ci1aJxA==
+"@jchavarri/bs-json@4.0.0-postinstall.0":
+  version "4.0.0-postinstall.0"
+  resolved "https://registry.yarnpkg.com/@jchavarri/bs-json/-/bs-json-4.0.0-postinstall.0.tgz#4e88ca6b31fbbc36dbf7febd75e4df652336d398"
+  integrity sha512-SLVn23/mShXtr/J9zlyvw6Gtkh29BkjT9kuSQDaZ3gN6lESETvSzXSH0Uw5YEWfvo++QljioT+qttSSyvj1weg==
+  dependencies:
+    bs-platform "^7.0.1"
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -631,10 +633,10 @@ browser-resolve@^1.11.3:
   dependencies:
     resolve "1.1.7"
 
-"bs-platform@>= 4.0.0":
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.6.tgz#88c13041fb020479800de3d82c680bf971091425"
-  integrity sha512-6Boa2VEcWJp2WJr38L7bp3J929nYha7gDarjxb070jWzgfPJ/WbzjipmSfnu2eqqk1MfjEIpBipbPz6n1NISwA==
+bs-platform@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-7.0.1.tgz#1d7b0ef6088b998dceee5db74a7cd8f01c20a3bd"
+  integrity sha512-UjStdtHhbtC/l6vKJ1XRDqrPk7rFf5PLYHtRX3akDXEYVnTbN36z0g4DEr5mU8S0N945e33HYts9x+i7hKKpZQ==
 
 bser@^2.0.0:
   version "2.1.0"

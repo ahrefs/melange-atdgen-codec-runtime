@@ -1,7 +1,6 @@
 {
-  "name": "@ahrefs/bs-atdgen-codec-runtime",
+  "name": "@jchavarri/bs-atdgen-codec-runtime",
   "namespace": false,
-  "version": "1.4.4",
   "bsc-flags": [
     "-bs-no-version-header",
     "-bs-super-errors"
@@ -10,10 +9,6 @@
     {
       "dir": "src",
       "subdirs": true
-    },
-    {
-      "dir": "__tests__",
-      "type": "dev"
     }
   ],
   "package-specs": {
@@ -22,7 +17,7 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@glennsl/bs-json"
+    "@jchavarri/bs-json"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest"

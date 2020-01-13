@@ -14,7 +14,7 @@ of atdgen.
 ## Installation
 
 ```
-yarn add @ahrefs/bs-atdgen-codec-runtime
+yarn add @jchavarri/bs-atdgen-codec-runtime
 ```
 
 This package doesn't take care of running atdgen to derive code from
@@ -23,7 +23,7 @@ obtained using [opam](https://opam.ocaml.org/).
 
 ## Usage
 
-Add `@ahrefs/bs-atdgen-codec-runtime` to the `bs-dependencies` of
+Add `@jchavarri/bs-atdgen-codec-runtime` to the `bs-dependencies` of
 `bsconfig.json`.
 
 To write atd type definitions, please have a look at the [great atd
