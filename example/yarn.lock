@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@ahrefs/bs-atdgen-codec-runtime@file:..":
+"@jchavarri/bs-atdgen-codec-runtime@file:..":
   version "2.0.0"
   dependencies:
     "@glennsl/bs-json" "^5.0.0"

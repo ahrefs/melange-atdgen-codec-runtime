@@ -14,6 +14,6 @@
     "bs-platform": ">= 7.0.0"
   },
   "dependencies": {
-    "@ahrefs/bs-atdgen-codec-runtime": "file:../"
+    "@jchavarri/bs-atdgen-codec-runtime": "file:../"
   }
 }
