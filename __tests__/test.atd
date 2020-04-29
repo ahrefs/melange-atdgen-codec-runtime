@@ -86,3 +86,7 @@ type b = {
 }
 
 type an_array = int list <ocaml repr="array">
+
+type deeply_nested = [
+ | A of (an_array * rec_list)
+]

@@ -41,9 +41,11 @@ type optional_field = Test_t.optional_field = {
 
 type n = Test_t.n
 
-type b = Test_t.b = { thing: int }
-
 type an_array = Test_t.an_array
+
+type deeply_nested = Test_t.deeply_nested
+
+type b = Test_t.b = { thing: int }
 
 type adapted_scalar = Test_t.adapted_scalar
 
@@ -119,13 +121,17 @@ val read_n :  n Atdgen_codec_runtime.Decode.t
 
 val write_n :  n Atdgen_codec_runtime.Encode.t
 
-val read_b :  b Atdgen_codec_runtime.Decode.t
-
-val write_b :  b Atdgen_codec_runtime.Encode.t
-
 val read_an_array :  an_array Atdgen_codec_runtime.Decode.t
 
 val write_an_array :  an_array Atdgen_codec_runtime.Encode.t
+
+val read_deeply_nested :  deeply_nested Atdgen_codec_runtime.Decode.t
+
+val write_deeply_nested :  deeply_nested Atdgen_codec_runtime.Encode.t
+
+val read_b :  b Atdgen_codec_runtime.Decode.t
+
+val write_b :  b Atdgen_codec_runtime.Encode.t
 
 val read_adapted_scalar :  adapted_scalar Atdgen_codec_runtime.Decode.t
 

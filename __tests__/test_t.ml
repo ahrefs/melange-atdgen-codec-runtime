@@ -37,9 +37,11 @@ type optional_field = {
 
 type n = int option
 
-type b = { thing: int }
-
 type an_array = int Atdgen_runtime.Util.ocaml_array
+
+type deeply_nested = [ `A of (an_array * rec_list) ]
+
+type b = { thing: int }
 
 type adapted_scalar = [ `A of int | `B of string ]
 

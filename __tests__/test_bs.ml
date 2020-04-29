@@ -41,9 +41,11 @@ type optional_field = Test_t.optional_field = {
 
 type n = Test_t.n
 
-type b = Test_t.b = { thing: int }
-
 type an_array = Test_t.an_array
+
+type deeply_nested = Test_t.deeply_nested
+
+type b = Test_t.b = { thing: int }
 
 type adapted_scalar = Test_t.adapted_scalar
 
@@ -607,6 +609,55 @@ let write_n = (
 let read_n = (
   read__5
 )
+let write__13 = (
+  Atdgen_codec_runtime.Encode.array (
+    Atdgen_codec_runtime.Encode.int
+  )
+)
+let read__13 = (
+  Atdgen_codec_runtime.Decode.array (
+    Atdgen_codec_runtime.Decode.int
+  )
+)
+let write_an_array = (
+  write__13
+)
+let read_an_array = (
+  read__13
+)
+let write_deeply_nested = (
+  Atdgen_codec_runtime.Encode.make (fun (x : _) -> match x with
+    | `A x ->
+    Atdgen_codec_runtime.Encode.constr1 "A" (
+      Atdgen_codec_runtime.Encode.tuple2
+        (
+          write_an_array
+        )
+        (
+          write_rec_list
+        )
+    ) x
+  )
+)
+let read_deeply_nested = (
+  Atdgen_codec_runtime.Decode.enum
+  [
+      (
+      "A"
+      ,
+        `Decode (
+        Atdgen_codec_runtime.Decode.tuple2
+          (
+            read_an_array
+          )
+          (
+            read_rec_list
+          )
+        |> Atdgen_codec_runtime.Decode.map (fun x -> ((`A x) : _))
+        )
+      )
+  ]
+)
 let write_b = (
   Atdgen_codec_runtime.Encode.make (fun (t : b) ->
     (
@@ -635,22 +686,6 @@ let read_b = (
       } : b)
     )
   )
-)
-let write__13 = (
-  Atdgen_codec_runtime.Encode.array (
-    Atdgen_codec_runtime.Encode.int
-  )
-)
-let read__13 = (
-  Atdgen_codec_runtime.Decode.array (
-    Atdgen_codec_runtime.Decode.int
-  )
-)
-let write_an_array = (
-  write__13
-)
-let read_an_array = (
-  read__13
 )
 let write_adapted_scalar = (
   Atdgen_codec_runtime.Encode.adapter Atdgen_codec_runtime.Json_adapter.Type_field.restore (
