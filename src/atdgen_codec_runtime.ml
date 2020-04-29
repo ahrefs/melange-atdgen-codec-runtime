@@ -159,7 +159,7 @@ module Decode = struct
   let decode' f json = f json
 
   let decode f json =
-    try decode' f json with
+    try f json with
     | DecodeErrorPath (path, msg) ->
       let path = String.concat "." path in
       raise (DecodeError {j|$path: $msg|j})
