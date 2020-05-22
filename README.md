@@ -59,4 +59,9 @@ cli to read and write data in a JSON file.
 
 For a complete introduction from atdgen installation to json
 manipulation, please refer to [Getting started with atdgen and
-bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081)
+bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081).
+
+If your project is using BuckleScript exclusively (i.e. not using native OCaml or Reason in the backend), you
+might consider using [`bs-atdgen-generator`](https://github.com/jchavarri/bs-atdgen-generator) in combination with this
+runtime library, in order to generate the `.ml` and `.mli` files from `.atd` sources without having to use native
+package managers like `esy` or `opam`.
