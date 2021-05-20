@@ -31,7 +31,7 @@
     "atdgen": "cd __tests__ && esy atdgen -t test.atd && esy atdgen -bs test.atd"
   },
   "devDependencies": {
-    "@glennsl/bs-jest": "^0.4.8",
+    "@glennsl/bs-jest": "^0.7.0",
     "bs-platform": ">= 4.0.0"
   },
   "peerDependencies": {

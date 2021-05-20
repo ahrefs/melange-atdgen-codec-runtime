@@ -54,10 +54,6 @@ module Json_adapter = struct
     include Make(Default_param)
   end
 
-  module Kind_field =
-    Type_field.Make(struct
-      let type_field_name = "kind"
-    end)
 end
 
 module Encode = struct
