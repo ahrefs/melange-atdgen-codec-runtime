@@ -1,12 +1,5 @@
 (** bs-json adapter for atdgen *)
 
-module Json : sig
-
-  type t = Js.Json.t
-  external read_t : t -> t = "%identity"
-  external write_t : t -> t = "%identity"
-
-end
 
 (** Module signature required of any json adapter.
     For example, an ATD annotation
@@ -19,10 +12,10 @@ module Json_adapter: sig
 
   module type S = sig
     (** Convert a real json tree into an atd-compliant form. *)
-    val normalize : Json.t -> Json.t
+    val normalize : Js.Json.t -> Js.Json.t
 
     (** Convert an atd-compliant json tree into a real json tree. *)
-    val restore : Json.t -> Json.t
+    val restore : Js.Json.t -> Js.Json.t
   end
 
   module Type_field : sig
@@ -50,9 +43,9 @@ module Encode : sig
 
   type 'a t = 'a -> Js.Json.t
 
-  val make : ('a -> Json.t) -> 'a t
+  val make : ('a -> Js.Json.t) -> 'a t
 
-  val encode : 'a t -> 'a -> Json.t
+  val encode : 'a t -> 'a -> Js.Json.t
 
   val unit : unit t
   val string : string t
@@ -72,15 +65,15 @@ module Encode : sig
   val field : ?default:'a -> 'a t -> name:string -> 'a -> field
   val field_o : ?default:'a -> 'a t -> name:string -> 'a option -> field
 
-  val obj : field list -> Json.t
+  val obj : field list -> Js.Json.t
 
   val tuple1 : 'a t -> 'a t
   val tuple2 : 'a t -> 'b t -> ('a * 'b) t
   val tuple3 : 'a t -> 'b t -> 'c t -> ('a * 'b * 'c) t
   val tuple4 : 'a t -> 'b t -> 'c t -> 'd t -> ('a * 'b * 'c * 'd) t
 
-  val constr0 : string -> Json.t
-  val constr1 : string -> 'a t -> 'a -> Json.t
+  val constr0 : string -> Js.Json.t
+  val constr1 : string -> 'a t -> 'a -> Js.Json.t
 
   val contramap : ('b -> 'a) -> 'a t -> 'b t
 
@@ -88,7 +81,7 @@ module Encode : sig
 
   val option_as_constr : 'a t -> 'a option t
 
-  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
+  val adapter: (Js.Json.t -> Js.Json.t) -> 'a t -> 'a t
 
 end
 
@@ -96,9 +89,9 @@ module Decode : sig
 
   type 'a t = Js.Json.t -> 'a
 
-  val make : (Json.t -> 'a) -> 'a t
+  val make : (Js.Json.t -> 'a) -> 'a t
 
-  val decode : 'a t -> Json.t -> 'a
+  val decode : 'a t -> Js.Json.t -> 'a
 
   val unit : unit t
   val bool : bool t
@@ -138,6 +131,6 @@ module Decode : sig
 
   val option_as_constr : 'a t -> 'a option t
 
-  val adapter: (Json.t -> Json.t) -> 'a t -> 'a t
+  val adapter: (Js.Json.t -> Js.Json.t) -> 'a t -> 'a t
 
 end
