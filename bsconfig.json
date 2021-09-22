@@ -8,8 +8,7 @@
   ],
   "sources": [
     {
-      "dir": "src",
-      "subdirs": true
+      "dir": "src"
     },
     {
       "dir": "__tests__",
@@ -28,6 +27,6 @@
     "@glennsl/bs-jest"
   ],
   "warnings": {
-    "error" : "+101"
+    "error": "+101"
   }
 }
