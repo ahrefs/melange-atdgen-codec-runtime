@@ -27,9 +27,9 @@ type vl = Test_t.vl
 
 type t = Test_t.t
 
-type int64 = Test_t.int64
+type myInt = Test_t.myInt
 
-type ro = Test_t.ro = { c: string; o: int64 option }
+type ro = Test_t.ro = { c: string; o: myInt option }
 
 type r = Test_t.r = { a: int; b: string }
 
@@ -428,20 +428,20 @@ let read_t = (
       Atdgen_codec_runtime.Decode.float
     )
 )
-let write_int64 = (
+let write_myInt = (
   Atdgen_codec_runtime.Encode.int64
 )
-let read_int64 = (
+let read_myInt = (
   Atdgen_codec_runtime.Decode.int64
 )
 let write__3 = (
   Atdgen_codec_runtime.Encode.option_as_constr (
-    write_int64
+    write_myInt
   )
 )
 let read__3 = (
   Atdgen_codec_runtime.Decode.option_as_constr (
-    read_int64
+    read_myInt
   )
 )
 let write_ro = (
@@ -458,7 +458,7 @@ let write_ro = (
         ;
           Atdgen_codec_runtime.Encode.field_o
             (
-            write_int64
+            write_myInt
             )
           ~name:"o"
           t.o
@@ -479,7 +479,7 @@ let read_ro = (
           o =
             Atdgen_codec_runtime.Decode.decode
             (
-              read_int64
+              read_myInt
               |> Atdgen_codec_runtime.Decode.fieldOptional "o"
             ) json;
       } : ro)

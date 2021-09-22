@@ -27,9 +27,9 @@ type vl = Test_t.vl
 
 type t = Test_t.t
 
-type int64 = Test_t.int64
+type myInt = Test_t.myInt
 
-type ro = Test_t.ro = { c: string; o: int64 option }
+type ro = Test_t.ro = { c: string; o: myInt option }
 
 type r = Test_t.r = { a: int; b: string }
 
@@ -101,9 +101,9 @@ val read_t :  t Atdgen_codec_runtime.Decode.t
 
 val write_t :  t Atdgen_codec_runtime.Encode.t
 
-val read_int64 :  int64 Atdgen_codec_runtime.Decode.t
+val read_myInt :  myInt Atdgen_codec_runtime.Decode.t
 
-val write_int64 :  int64 Atdgen_codec_runtime.Encode.t
+val write_myInt :  myInt Atdgen_codec_runtime.Encode.t
 
 val read_ro :  ro Atdgen_codec_runtime.Decode.t
 

@@ -3,7 +3,7 @@
   atdgen -bs test.atd -open Test_t
 *)
 
-type int64 = int <ocaml repr="int64">
+type myInt = int <ocaml repr="int64">
 
 type r = {
   a: int;
@@ -26,7 +26,7 @@ type vpl = vp list
 
 type ro = {
   c: string;
-  ?o: int64 option;
+  ?o: myInt option;
 }
 
 type optional_field = {

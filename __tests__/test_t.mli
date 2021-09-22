@@ -23,9 +23,9 @@ type vl = v list
 
 type t = (int * string * float)
 
-type int64 = Int64.t
+type myInt = Int64.t
 
-type ro = { c: string; o: int64 option }
+type ro = { c: string; o: myInt option }
 
 type r = { a: int; b: string }
 
