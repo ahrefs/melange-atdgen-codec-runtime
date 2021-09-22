@@ -1,5 +1,3 @@
-open Printf
-
 include Json_decode
 
 exception DecodeErrorPath of string list * string
@@ -24,7 +22,8 @@ let with_segment segment f json =
 let unit j =
   if (Obj.magic j : 'a Js.null) == Js.null
   then ()
-  else raise (DecodeError (sprintf "Expected null, got %s" (Js.Json.stringify j)))
+  else 
+    raise (DecodeError ("Expected null, got " ^ (Js.Json.stringify j)))
 
 let int32 j = Int32.of_string (string j)
 let int64 j = Int64.of_string (string j)
@@ -211,14 +210,14 @@ let enum l json =
   match either constr0 constr json with
   | `Constr0 s -> with_segment s (fun () ->
     match List.assoc s l with
-    | exception Not_found -> raise @@ DecodeError (sprintf "unknown constructor %S" s)
+    | exception Not_found -> raise @@ DecodeError ({j|unknown constructor "$s"|j})
     | `Single a -> a
-    | `Decode _ -> raise @@ DecodeError (sprintf "constructor %S expects arguments" s)
+    | `Decode _ -> raise @@ DecodeError ({j|constructor "$s" expects arguments|j})
     ) ()
   | `Constr (s, args) -> with_segment s (fun () ->
     match List.assoc s l with
-    | exception Not_found -> raise @@ DecodeError (sprintf "unknown constructor %S" s)
-    | `Single _ -> raise @@ DecodeError (sprintf "constructor %S doesn't expect arguments" s)
+    | exception Not_found -> raise @@ DecodeError ({j|unknown constructor "$s"|j})
+    | `Single _ -> raise @@ DecodeError ({j|constructor "$s" doesn't expect arguments|j})
     | `Decode d -> decode' d args
     ) ()
 
@@ -227,11 +226,11 @@ let option_as_constr f =
     (fun x ->
         if string x = "None"
         then None
-        else raise (DecodeError (sprintf "Expected None, got %s" (Js.Json.stringify x))))
+        else raise (DecodeError ("Expected None, got " ^ (Js.Json.stringify x))))
     (fun x ->
         match pair string f x with
         | ("Some",v) -> Some v
-        | _ -> raise (DecodeError (sprintf "Expected Some _, got %s" (Js.Json.stringify x))))
+        | _ -> raise (DecodeError ("Expected Some _, got " ^ (Js.Json.stringify x))))
 
 let adapter (normalize: Js.Json.t -> Js.Json.t) (reader: 'a t) json =
   reader (normalize json)
