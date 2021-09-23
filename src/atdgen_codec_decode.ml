@@ -137,6 +137,8 @@ let fieldOptional key decode json =
     let dict = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     match Js.Dict.get dict key with
     | None -> None
+    (* treat fields with null values as missing fields (atdgen's default) *)
+    | Some value when (Js.Json.test value Null) -> None
     | Some value -> (
         try Some (with_segment key decode value)
         with DecodeError msg ->
