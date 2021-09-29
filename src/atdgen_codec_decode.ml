@@ -97,11 +97,7 @@ let tuple4 decodeA decodeB decodeC decodeD json =
   else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
 
 let dict decode json =
-  if
-    Js.typeof json = "object"
-    && (not (Js.Array.isArray json))
-    && not (Js.Json.test json Null)
-  then (
+  if Js.Json.test json Object then (
     let source = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     let keys = Js.Dict.keys source in
     let l = Js.Array.length keys in
@@ -118,11 +114,7 @@ let dict decode json =
   else raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
 
 let field key decode json =
-  if
-    Js.typeof json = "object"
-    && (not (Js.Array.isArray json))
-    && not (Js.Json.test json Null)
-  then
+  if Js.Json.test json Object then
     let dict = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     match Js.Dict.get dict key with
     | Some value -> (
@@ -141,11 +133,7 @@ let nullable decode json =
 
 (* Unlike Json_decode.field, this returns None if key is not found *)
 let fieldOptional key decode json =
-  if
-    Js.typeof json = "object"
-    && (not (Js.Array.isArray json))
-    && not (Js.Json.test json Null)
-  then
+  if Js.Json.test json Object then
     let dict = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     match Js.Dict.get dict key with
     | None -> None
