@@ -21,7 +21,7 @@ let with_segment segment f json =
       raise (DecodeErrorPath (segment :: path, msg))
 
 let unit j =
-  if (Obj.magic j : 'a Js.null) == Js.null then ()
+  if Js.Json.test j Null then ()
   else raise (DecodeError ("Expected null, got " ^ Js.Json.stringify j))
 
 let int32 j = Int32.of_string (string j)
@@ -100,7 +100,7 @@ let dict decode json =
   if
     Js.typeof json = "object"
     && (not (Js.Array.isArray json))
-    && not ((Obj.magic json : 'a Js.null) == Js.null)
+    && not (Js.Json.test json Null)
   then (
     let source = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     let keys = Js.Dict.keys source in
@@ -121,7 +121,7 @@ let field key decode json =
   if
     Js.typeof json = "object"
     && (not (Js.Array.isArray json))
-    && not ((Obj.magic json : 'a Js.null) == Js.null)
+    && not (Js.Json.test json Null)
   then
     let dict = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     match Js.Dict.get dict key with
@@ -137,14 +137,14 @@ let obj_array f json = dict f json |> Js.Dict.entries
 let obj_list f json = obj_array f json |> Array.to_list
 
 let nullable decode json =
-  if (Obj.magic json : 'a Js.null) == Js.null then None else Some (decode json)
+  if Js.Json.test json Null then None else Some (decode json)
 
 (* Unlike Json_decode.field, this returns None if key is not found *)
 let fieldOptional key decode json =
   if
     Js.typeof json = "object"
     && (not (Js.Array.isArray json))
-    && not ((Obj.magic json : 'a Js.null) == Js.null)
+    && not (Js.Json.test json Null)
   then
     let dict = (Obj.magic (json : Js.Json.t) : Js.Json.t Js.Dict.t) in
     match Js.Dict.get dict key with
