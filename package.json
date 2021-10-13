@@ -1,6 +1,6 @@
 {
   "name": "@ahrefs/bs-atdgen-codec-runtime",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "bucklescript runtime for atdgen",
   "main": "src/atdgen_codec_runtime.bs.js",
   "repository": "https://github.com/ahrefs/bs-atdgen-codec-runtime.git",
@@ -24,18 +24,15 @@
     "bucklescript"
   ],
   "scripts": {
-    "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w",
+    "clean": "rescript clean",
+    "build": "rescript",
+    "watch": "rescript build -w",
     "test": "yarn build && yarn jest __tests__/*_test.bs.js",
     "atdgen": "cd __tests__ && esy atdgen -t test.atd && esy atdgen -bs test.atd"
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.7.0",
-    "bs-platform": ">= 4.0.0"
-  },
-  "peerDependencies": {
-    "bs-platform": ">= 4.0.0"
+    "rescript": "^9.1.4"
   },
   "dependencies": {
     "@glennsl/bs-json": "^5.0.0"

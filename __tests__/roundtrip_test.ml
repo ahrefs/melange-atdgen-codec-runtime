@@ -57,8 +57,8 @@ let () =
       ~data:(Some 1);
     run_test
       ~name:"int64"
-      ~write:Test_bs.write_int64
-      ~read:Test_bs.read_int64
+      ~write:Test_bs.write_myInt
+      ~read:Test_bs.read_myInt
       ~data:3L;
     run_test
       ~name:"recurse"
