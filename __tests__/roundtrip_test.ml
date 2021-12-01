@@ -1,3 +1,5 @@
+(** Test that encoding + decoding a value equals to the original value. *)
+
 open Jest
 
 let run_test ~name ~write ~read ~data =
@@ -11,40 +13,6 @@ let run_test ~name ~write ~read ~data =
     |> toEqual data'
   )
 
-let run_read_test ~name ~read ~data ~expected =
-  let open Expect in
-  let decode = Atdgen_codec_runtime.Decode.decode read in
-  let data' = decode data in
-  test name (fun () ->
-    expect data'
-    |> toEqual expected
-  )
-
-
-(** Test that decoding data that wouldn't normally be encoded still equals the correct value *)
-let () =
-    describe "read tests" (fun () ->
-      run_read_test
-        ~name:"nullable field set to null"
-        ~read:Test_bs.read_optional_field
-        ~expected:{with_default = 9; no_default = None; no_default_nullable = None}
-        ~data:begin
-          let input = Js.Dict.empty () in
-          let () = Js.Dict.set input "no_default_nullable" Js.Json.null in
-          Js.Json.object_ input
-        end;
-      run_read_test
-        ~name:"optional field set to null"
-        ~read:Test_bs.read_optional_field
-        ~expected:{with_default = 9; no_default = None; no_default_nullable = None}
-        ~data:begin
-          let input = Js.Dict.empty () in
-          let () = Js.Dict.set input "no_default" Js.Json.null in
-          Js.Json.object_ input
-        end;
-    )
-
-(** Test that encoding + decoding a value equals to the original value. *)
 let () =
   describe "roundtrip tests" (fun () ->
     run_test
