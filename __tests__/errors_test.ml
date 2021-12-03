@@ -15,17 +15,19 @@ let () =
       let j = Json.parseOrRaise {|{}|} in
       expect (wrap_exn (fun () -> Atdgen_codec_runtime.Decode.(option_as_constr int)j))
       |> toBe (
-        "All decoders given to oneOf failed. Here are all the errors: \
-        [object Object]. And the JSON \
-        being decoded: {}"));
+        "All decoders given to oneOf failed. Here are all the errors: \n\
+         - Expected string, got {}\n\
+         - Expected array, got {}\n\
+         And the JSON being decoded: {}"));
 
     test "enum" (fun () ->
       let j = Json.parseOrRaise {|{}|} in
       expect (wrap_exn (fun () -> Atdgen_codec_runtime.Decode.(enum []) j))
       |> toBe(
-                             "All decoders given to oneOf failed. Here are all the errors: \
-                              [object Object]. And the JSON \
-                              being decoded: {}"));
+        "All decoders given to oneOf failed. Here are all the errors: \n\
+         - Expected string, got {}\n\
+         - Expected array, got {}\n\
+         And the JSON being decoded: {}"));
 
     test "missing field in record" (fun () ->
       let j = Json.parseOrRaise {|{"o": 44}|} in
