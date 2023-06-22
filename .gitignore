@@ -9,3 +9,5 @@ yarn-error.log*
 *.bs.js
 
 _esy
+_build
+_opam

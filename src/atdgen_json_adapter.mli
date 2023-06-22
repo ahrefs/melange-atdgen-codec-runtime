@@ -23,5 +23,5 @@ module Type_field : sig
     module Kind_field = Type_field.Make (struct let type_field_name = "kind" end)
     ]}
   *)
-  module Make (Param : Param) : S
+  module Make (_ : Param) : S
 end

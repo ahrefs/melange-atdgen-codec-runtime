@@ -1,4 +1,4 @@
-include Json_encode
+include Json.Encode
 
 type 'a t = 'a encoder
 

@@ -1,0 +1,18 @@
+(melange.emit
+ (target test)
+ (alias test)
+ (libraries melange_atdgen_codec_runtime melange-jest.jest)
+ (preprocess
+  (pps melange.ppx)))
+
+(rule
+ (targets test_bs.ml test_bs.mli)
+ (deps test.atd)
+ (action
+  (run atdgen -bs %{deps})))
+
+(rule
+ (targets test_t.ml test_t.mli)
+ (deps test.atd)
+ (action
+  (run atdgen -t %{deps})))
