@@ -291,18 +291,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@glennsl/bs-jest@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@glennsl/bs-jest/-/bs-jest-0.7.0.tgz#6b6168edf15aa4dab51cfe7734b36705beac2f11"
-  integrity sha512-GF8+OQQXLYQXCJidTDPJbTejBMAU4VgnkPoLlrznAvSi9qeDSl8Yl3zuo/Wezu8A4rpijW3Gb8ltQozP3pHw7w==
-  dependencies:
-    jest "^26.5.2"
-
-"@glennsl/bs-json@^5.0.0":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@glennsl/bs-json/-/bs-json-5.0.4.tgz#8a80906f3b5e04d78dc06722e5987ff6499c89a8"
-  integrity sha512-Th9DetZjRlMZrb74kgGJ44oWcoFyOTE884WlSuXft0Cd+J09vHRxiB7eVyK7Gthb4cSevsBBJDHYAbGGL25wPw==
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -2783,11 +2771,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
-
-rescript@^9.1.4:
-  version "9.1.4"
-  resolved "https://registry.yarnpkg.com/rescript/-/rescript-9.1.4.tgz#1eb126f98d6c16942c0bf0df67c050198e580515"
-  integrity sha512-aXANK4IqecJzdnDpJUsU6pxMViCR5ogAxzuqS0mOr8TloMnzAjJFu63fjD6LCkWrKAhlMkFFzQvVQYaAaVkFXw==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"

@@ -1,4 +1,4 @@
-include Json_decode
+include Json.Decode
 
 exception DecodeErrorPath of string list * string
 

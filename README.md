@@ -1,29 +1,49 @@
-# bs-atdgen-codec-runtime
+# melange-atdgen-codec-runtime
 
-`bs-atdgen-codec-runtime` is a bucklescript runtime for
+`melange-atdgen-codec-runtime` is a Melange runtime for
 [atdgen](https://github.com/ahrefs/atd). It is based on the json type
 provided by bucklescript and combinators of
-[@glennsl/bs-json](https://github.com/glennsl/bs-json).
+[melange-json](https://github.com/melange-community/melange-json).
 
 ## Installation
 
-```
-yarn add @ahrefs/bs-atdgen-codec-runtime
-```
+Install [opam](https://opam.ocaml.org/) package manager.
 
-This package doesn't take care of running atdgen to derive code from
-type definitions. This step requires the `atdgen` binary which can be
-obtained using [opam](https://opam.ocaml.org/) or [esy](https://esy.sh/).
+Then:
 
-Alternatively, if your project is using BuckleScript exclusively (i.e. not using native OCaml or Reason in the backend),
-you might consider using [`bs-atdgen-generator`](https://github.com/jchavarri/bs-atdgen-generator) in combination with
-this runtime library, in order to generate the `.ml` and `.mli` files from `.atd` sources without having to use native
-package managers like `esy` or `opam`.
+```
+opam pin add melange-atdgen-codec-runtime.dev git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git#main
+```
 
 ## Usage
 
-Add `@ahrefs/bs-atdgen-codec-runtime` to the `bs-dependencies` of
-`bsconfig.json`.
+To generate `ml` files from `atd` ones, add a couple of rules to your `dune` file:
+
+```dune
+(rule
+ (targets test_bs.ml test_bs.mli)
+ (deps test.atd)
+ (action
+  (run atdgen -bs %{deps})))
+
+(rule
+ (targets test_t.ml test_t.mli)
+ (deps test.atd)
+ (action
+  (run atdgen -t %{deps})))
+```
+
+You can see examples in [the tests](./src/__tests__/dune) or [the example](./example/src/dune).
+
+To use the generated modules, you will need to include the runtime library in
+your project. To do so, add  `melange-atdgen-codec-runtime` to the `libraries`
+field in your `dune` file:
+
+```dune
+; ...
+  (libraries melange-atdgen-codec-runtime)
+; ...
+```
 
 To write atd type definitions, please have a look at the [great atd
 documentation](https://atd.readthedocs.io/en/latest/).
@@ -31,7 +51,7 @@ documentation](https://atd.readthedocs.io/en/latest/).
 ## Simple example
 
 Reason code to query and deserialize the response of a REST API. It
-requires `bs-fetch`.
+requires [melange-fetch](https://github.com/melange-community/melange-fetch).
 
 ```
 let get = (url, decode) =>

@@ -1,0 +1,42 @@
+opam-version: "2.0"
+synopsis: "A Melange runtime for atdgen."
+description: """A Melange runtime for atdgen.
+It is based on the json type provided by Melange and combinators
+of @glennsl/bs-json.
+"""
+maintainer: "Ahrefs"
+authors: "Ahrefs"
+license: "MIT"
+homepage: "https://github.com/ahrefs/melange-atdgen-codec-runtime"
+bug-reports: "https://github.com/ahrefs/melange-atdgen-codec-runtime/issues"
+depends: [
+  "dune" {>= "3.8"}
+  "ocaml" {>= "4.14.0"}
+  "melange" {>= "1.0.0"}
+  "atd"
+  "atdgen"
+  "melange-json" {dev}
+  "melange-jest" {with-test}
+  "reason" {with-test}
+  "odoc" {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git"
+
+pin-depends: [
+  [ "melange-json.dev" "git+https://github.com/melange-community/melange-json.git#fc261a78b99acfb2b6560029f09caabc2d218482" ]
+  [ "melange-jest.dev" "git+https://github.com/melange-community/melange-jest.git#8d23fb39db19151cb3263d0daedb7b2a7869ce62" ]
+]

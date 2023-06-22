@@ -1,0 +1,16 @@
+(melange.emit
+ (target example)
+ (alias example)
+ (libraries melange_atdgen_codec_runtime))
+
+(rule
+ (targets meetup_bs.ml meetup_bs.mli)
+ (deps meetup.atd)
+ (action
+  (run atdgen -bs %{deps})))
+
+(rule
+ (targets meetup_t.ml meetup_t.mli)
+ (deps meetup.atd)
+ (action
+  (run atdgen -t %{deps})))

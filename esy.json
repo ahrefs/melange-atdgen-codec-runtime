@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@opam/atd": "*",
-    "@opam/atdgen": "*"
-  },
-  "devDependencies": {
-    "ocaml": "4.11.*"
-  }
-}

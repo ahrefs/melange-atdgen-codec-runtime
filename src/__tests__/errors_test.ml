@@ -1,7 +1,7 @@
 open Jest
 open Expect
 
-let wrap_exn exp = try let _ = exp () in "not called" with Json_decode.DecodeError str -> str
+let wrap_exn exp = try let _ = exp () in "not called" with Json.Decode.DecodeError str -> str
 
 let () =
   describe "exceptions" (fun () ->
