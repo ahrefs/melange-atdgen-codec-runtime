@@ -12,7 +12,7 @@ Install [opam](https://opam.ocaml.org/) package manager.
 Then:
 
 ```
-opam pin add melange-atdgen-codec-runtime.dev git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git#main
+opam pin add melange-atdgen-codec-runtime.dev git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git#master
 ```
 
 ## Usage
