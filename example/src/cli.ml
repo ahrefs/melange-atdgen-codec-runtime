@@ -14,7 +14,7 @@ let print_event (event: Meetup_t.event) =
 
 let read_events () =
   (* read the file from disk *)
-  let file_content = Node_fs.readFileAsUtf8Sync event_file in
+  let file_content = Node.Fs.readFileAsUtf8Sync event_file in
   (* parse the json *)
   let json = Js.Json.parseExn file_content in
   (* turn it into a proper record *)
@@ -27,7 +27,7 @@ let write_events events =
   (* convert the json to string *)
   let file_content = Js.Json.stringifyWithSpace json 2 in
   (* write the json in our file *)
-  Node_fs.writeFileAsUtf8Sync event_file file_content
+  Node.Fs.writeFileAsUtf8Sync event_file file_content
 
 let print_events () =
   read_events ()

@@ -1,8 +1,8 @@
 opam-version: "2.0"
-synopsis: "A Melange runtime for atdgen."
-description: """A Melange runtime for atdgen.
-It is based on the json type provided by Melange and combinators
-of @glennsl/bs-json.
+synopsis: "A Melange runtime for atdgen"
+description: """A Melange runtime for atdgen, based on the Js.Json.t type
+provided by Melange and the combinators
+from @glennsl/bs-json
 """
 maintainer: "Ahrefs"
 authors: "Ahrefs"
@@ -11,13 +11,14 @@ homepage: "https://github.com/ahrefs/melange-atdgen-codec-runtime"
 bug-reports: "https://github.com/ahrefs/melange-atdgen-codec-runtime/issues"
 depends: [
   "dune" {>= "3.8"}
-  "ocaml" {>= "4.14.0"}
-  "melange" {>= "1.0.0"}
+  "ocaml"
+  "melange" {>= "2.0.0"}
   "atd"
   "atdgen"
-  "melange-json" {dev}
+  "melange-json"
   "melange-jest" {with-test}
   "reason" {with-test}
+  "opam-check-npm-deps" {with-test} # todo: use with-dev-setup once opam 2.2 is out
   "odoc" {with-doc}
 ]
 build: [
@@ -35,8 +36,11 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git"
-
 pin-depends: [
-  [ "melange-json.dev" "git+https://github.com/melange-community/melange-json.git#fc261a78b99acfb2b6560029f09caabc2d218482" ]
-  [ "melange-jest.dev" "git+https://github.com/melange-community/melange-jest.git#8d23fb39db19151cb3263d0daedb7b2a7869ce62" ]
+  [ "melange.2.0.0"        "git+https://github.com/melange-re/melange.git#e114ad55d185badeb32b3c766c9ab547495eac1b" ]
+  [ "reason.3.10.0"        "git+https://github.com/reasonml/reason.git#972261dab3b651ff8ab9b8b9fcc32940595073dc" ]
+  [ "melange-jest.dev"     "git+https://github.com/melange-community/melange-jest.git#acb6ef50beef3c486805d616b90aa7b56b51172d" ]
+  [ "melange-webapi.dev"   "git+https://github.com/melange-community/melange-webapi.git#96dc1e2a867624d18050fad25cf1c71af7a098e1" ]
+  [ "melange-fetch.dev"    "git+https://github.com/melange-community/melange-fetch.git#796f941b6b85eb7e6182ac6e4f40708bfde7a9a9" ]
+  [ "melange-json.dev"     "git+https://github.com/melange-community/melange-json.git#ac8a148691400699784857dd0bcdc5d5d5c2e481" ]
 ]
