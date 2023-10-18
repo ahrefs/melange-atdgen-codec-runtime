@@ -36,11 +36,3 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git"
-pin-depends: [
-  [ "melange.2.0.0"        "git+https://github.com/melange-re/melange.git#e114ad55d185badeb32b3c766c9ab547495eac1b" ]
-  [ "reason.3.10.0"        "git+https://github.com/reasonml/reason.git#972261dab3b651ff8ab9b8b9fcc32940595073dc" ]
-  [ "melange-jest.dev"     "git+https://github.com/melange-community/melange-jest.git#acb6ef50beef3c486805d616b90aa7b56b51172d" ]
-  [ "melange-webapi.dev"   "git+https://github.com/melange-community/melange-webapi.git#96dc1e2a867624d18050fad25cf1c71af7a098e1" ]
-  [ "melange-fetch.dev"    "git+https://github.com/melange-community/melange-fetch.git#796f941b6b85eb7e6182ac6e4f40708bfde7a9a9" ]
-  [ "melange-json.dev"     "git+https://github.com/melange-community/melange-json.git#ac8a148691400699784857dd0bcdc5d5d5c2e481" ]
-]
