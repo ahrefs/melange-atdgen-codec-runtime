@@ -1,6 +1,7 @@
 {
   "license": "MIT",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.10.0",
     "jest": "^26.5.2"
   }
 }
