@@ -18,7 +18,7 @@ depends: [
   "melange-json"
   "melange-jest" {with-test}
   "reason" {with-test}
-  "opam-check-npm-deps" {with-test} # todo: use with-dev-setup once opam 2.2 is out
+  "opam-check-npm-deps" {with-dev-setup}
   "odoc" {with-doc}
 ]
 build: [
