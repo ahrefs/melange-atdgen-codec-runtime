@@ -1,4 +1,4 @@
-(** bs-json adapter for atdgen *)
+(** melange-json adapter for atdgen *)
 
 
 (** Module signature required of any json adapter.
