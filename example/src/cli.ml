@@ -57,4 +57,4 @@ let () =
   match Array.to_list Sys.argv with
   | _ :: _ :: "print" :: _ -> print_events ()
   | _ :: _ :: "add" :: name :: email :: _ -> add_event name email
-  | _  -> print_endline "usage: nodejs cli.bs.js <print|add>"
+  | _  -> print_endline "usage: node cli.js <print|add>"
