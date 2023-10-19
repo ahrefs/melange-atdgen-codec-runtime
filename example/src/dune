@@ -1,7 +1,7 @@
 (melange.emit
  (target example)
  (alias example)
- (libraries melange_atdgen_codec_runtime))
+ (libraries melange.node melange_atdgen_codec_runtime))
 
 (rule
  (targets meetup_bs.ml meetup_bs.mli)
