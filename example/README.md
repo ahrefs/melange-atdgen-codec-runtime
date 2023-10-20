@@ -17,15 +17,15 @@ dune build @example
 
 ```
 $ echo "[]" > events.json
-$ node _build/default/example/src/example/example/src/cli.js add louis louis@nospam.com
-$ node _build/default/example/src/example/example/src/cli.js meetup print
+$ node example/src/example/example/src/cli.js add louis louis@nospam.com
+$ node example/src/example/example/src/cli.js print meetup
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:13 GMT
 access: public
 host: louis <louis@nospam.com>
 guests: 1
-$ node _build/default/example/src/example/example/src/cli.js meetup add bob bob@nospam.com
-$ node _build/default/example/src/example/example/src/cli.js meetup print
+$ node example/src/example/example/src/cli.js add bob bob@nospam.com
+$ node example/src/example/example/src/cli.js print meetup
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:16 GMT
 access: public
