@@ -1,8 +1,7 @@
-# Atdgen for bucklescript, the example
+# ATD for Melange, the example
 
-A detail explanation of this example is available at [Getting started
-with atdgen and
-bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081)
+A detail explanation of this example is available at [Getting started with ATD
+and Melange](https://tech.ahrefs.com/getting-started-with-atd-and-melange-1f3a14004081)
 
 ## Compile the project
 

@@ -1,8 +1,8 @@
 # melange-atdgen-codec-runtime
 
 `melange-atdgen-codec-runtime` is a Melange runtime for
-[atdgen](https://github.com/ahrefs/atd). It is based on the json type
-provided by bucklescript and combinators of
+[atdgen](https://github.com/ahrefs/atd). It is based on the `Js.Json.t`
+provided by Melange and combinators of
 [melange-json](https://github.com/melange-community/melange-json).
 
 ## Installation
@@ -77,5 +77,5 @@ The [example](example) directory contains a full example of a simple
 cli to read and write data in a JSON file.
 
 For a complete introduction from atdgen installation to json
-manipulation, please refer to [Getting started with atdgen and
-bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081).
+manipulation, please refer to [Getting started with ATD and
+Melange](https://tech.ahrefs.com/getting-started-with-atd-and-melange-1f3a14004081).
