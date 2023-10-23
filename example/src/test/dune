@@ -1,0 +1,3 @@
+(cram
+ (deps
+  (alias_rec %{workspace_root}/example)))

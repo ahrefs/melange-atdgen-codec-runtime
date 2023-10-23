@@ -1,8 +1,7 @@
-# Atdgen for bucklescript, the example
+# ATD for Melange, the example
 
-A detail explanation of this example is available at [Getting started
-with atdgen and
-bucklescript](https://tech.ahrefs.com/getting-started-with-atdgen-and-bucklescript-1f3a14004081)
+A detail explanation of this example is available at [Getting started with ATD
+and Melange](https://tech.ahrefs.com/getting-started-with-atd-and-melange-1f3a14004081)
 
 ## Compile the project
 
@@ -17,15 +16,15 @@ dune build @example
 
 ```
 $ echo "[]" > events.json
-$ node _build/default/example/src/example/example/src/cli.js add louis louis@nospam.com
-$ node _build/default/example/src/example/example/src/cli.js meetup print
+$ node example/src/example/example/src/cli.js add louis louis@nospam.com
+$ node example/src/example/example/src/cli.js print meetup
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:13 GMT
 access: public
 host: louis <louis@nospam.com>
 guests: 1
-$ node _build/default/example/src/example/example/src/cli.js meetup add bob bob@nospam.com
-$ node _build/default/example/src/example/example/src/cli.js meetup print
+$ node example/src/example/example/src/cli.js add bob bob@nospam.com
+$ node example/src/example/example/src/cli.js print meetup
 === OCaml/Reason Meetup! summary ===
 date: Tue, 11 Sep 2018 15:04:16 GMT
 access: public

@@ -12,3 +12,4 @@ yarn-error.log*
 *_bs.ml
 *_bs.mli
 _esy
+src/example
