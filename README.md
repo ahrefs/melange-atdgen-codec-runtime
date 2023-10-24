@@ -11,15 +11,15 @@ Install [opam](https://opam.ocaml.org/) package manager.
 
 Then:
 
-```
-opam pin add melange-atdgen-codec-runtime.dev git+https://github.com/ahrefs/melange-atdgen-codec-runtime.git#master
+```bash
+opam install melange-atdgen-codec-runtime
 ```
 
 ## Usage
 
 To generate `ml` files from `atd` ones, add a couple of rules to your `dune` file:
 
-```dune
+```clojure
 (rule
  (targets test_bs.ml test_bs.mli)
  (deps test.atd)
@@ -39,7 +39,7 @@ To use the generated modules, you will need to include the runtime library in
 your project. To do so, add  `melange-atdgen-codec-runtime` to the `libraries`
 field in your `dune` file:
 
-```dune
+```clojure
 ; ...
   (libraries melange-atdgen-codec-runtime)
 ; ...
@@ -53,7 +53,7 @@ documentation](https://atd.readthedocs.io/en/latest/).
 Reason code to query and deserialize the response of a REST API. It
 requires [melange-fetch](https://github.com/melange-community/melange-fetch).
 
-```
+```ocaml
 let get = (url, decode) =>
   Js.Promise.(
     Fetch.fetchWithInit(
