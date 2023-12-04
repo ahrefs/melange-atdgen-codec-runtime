@@ -5,6 +5,6 @@
  (public_name melange-atdgen-codec-runtime)
  (modes melange)
  (wrapped false)
- (libraries melange-json)
+ (libraries melange.belt melange-json)
  (preprocess
   (pps melange.ppx)))
