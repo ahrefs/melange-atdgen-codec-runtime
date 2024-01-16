@@ -1,3 +1,5 @@
+exception DecodeErrorPath of string list * string
+
 type 'a t = Js.Json.t -> 'a
 
 val make : (Js.Json.t -> 'a) -> 'a t
