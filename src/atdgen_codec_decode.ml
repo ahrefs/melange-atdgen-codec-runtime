@@ -56,9 +56,10 @@ let pair decodeA decodeB json =
           with_segment "1" decodeB (Array.unsafe_get source 1) )
       with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin pair/tuple2")
     else
+      let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 2, got array of length $length|j}
+           {j|Expected array of length 2, got array of length $length_str|j}
   else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
 
 let tuple2 = pair
@@ -74,9 +75,10 @@ let tuple3 decodeA decodeB decodeC json =
           with_segment "2" decodeC (Array.unsafe_get source 2) )
       with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple3")
     else
+      let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 3, got array of length $length|j}
+           {j|Expected array of length 3, got array of length $length_str|j}
   else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
 
 let tuple4 decodeA decodeB decodeC decodeD json =
@@ -91,9 +93,10 @@ let tuple4 decodeA decodeB decodeC decodeD json =
           with_segment "4" decodeD (Array.unsafe_get source 3) )
       with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple4")
     else
+      let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 4, got array of length $length|j}
+           {j|Expected array of length 4, got array of length $length_str|j}
   else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
 
 let dict decode json =
@@ -156,9 +159,10 @@ let tuple1 f x =
       try with_segment "0" f (Array.unsafe_get source 0)
       with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple1")
     else
+      let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 1, got array of length $length|j}
+           {j|Expected array of length 1, got array of length $length_str|j}
   else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify x)
 
 let enum l json =
