@@ -12,17 +12,17 @@ let decode f json =
   try f json
   with DecodeErrorPath (path, msg) ->
     let path = String.concat "." path in
-    raise (DecodeError {j|$path: $msg|j})
+    raise (DecodeError (Json_error {j|$path: $msg|j}))
 
 let with_segment segment f json =
   try f json with
-  | DecodeError msg -> raise (DecodeErrorPath ([ segment ], msg))
+  | DecodeError (Json_error msg) -> raise (DecodeErrorPath ([ segment ], msg))
   | DecodeErrorPath (path, msg) ->
       raise (DecodeErrorPath (segment :: path, msg))
 
 let unit j =
   if Js.Json.test j Null then ()
-  else raise (DecodeError ("Expected null, got " ^ Js.Json.stringify j))
+  else raise (DecodeError (Json_error ("Expected null, got " ^ Js.Json.stringify j)))
 
 let int32 j = Int32.of_string (string j)
 
@@ -36,13 +36,13 @@ let array decode json =
     for i = 0 to length - 1 do
       let value =
         try with_segment (string_of_int i) decode (Array.unsafe_get source i)
-        with DecodeError msg ->
-          raise @@ DecodeError (msg ^ "\n\tin array at index " ^ string_of_int i)
+        with DecodeError (Json_error msg) ->
+          raise @@ DecodeError (Json_error (msg ^ "\n\tin array at index " ^ string_of_int i))
       in
       Array.unsafe_set target i value
     done;
     target)
-  else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
+  else raise @@ DecodeError (Json_error ("Expected array, got " ^ Js.Json.stringify json))
 
 let list decode json = json |> array decode |> Array.to_list
 
@@ -54,13 +54,13 @@ let pair decodeA decodeB json =
       try
         ( with_segment "0" decodeA (Array.unsafe_get source 0),
           with_segment "1" decodeB (Array.unsafe_get source 1) )
-      with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin pair/tuple2")
+      with DecodeError (Json_error msg) -> raise @@ DecodeError (Json_error (msg ^ "\n\tin pair/tuple2"))
     else
       let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 2, got array of length $length_str|j}
-  else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
+           (Json_error {j|Expected array of length 2, got array of length $length_str|j})
+  else raise @@ DecodeError (Json_error ("Expected array, got " ^ Js.Json.stringify json))
 
 let tuple2 = pair
 
@@ -73,13 +73,13 @@ let tuple3 decodeA decodeB decodeC json =
         ( with_segment "0" decodeA (Array.unsafe_get source 0),
           with_segment "1" decodeB (Array.unsafe_get source 1),
           with_segment "2" decodeC (Array.unsafe_get source 2) )
-      with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple3")
+      with DecodeError (Json_error msg) -> raise @@ DecodeError (Json_error (msg ^ "\n\tin tuple3"))
     else
       let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 3, got array of length $length_str|j}
-  else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
+           (Json_error {j|Expected array of length 3, got array of length $length_str|j})
+  else raise @@ DecodeError (Json_error ("Expected array, got " ^ Js.Json.stringify json))
 
 let tuple4 decodeA decodeB decodeC decodeD json =
   if Js.Array.isArray json then
@@ -91,13 +91,13 @@ let tuple4 decodeA decodeB decodeC decodeD json =
           with_segment "2" decodeB (Array.unsafe_get source 1),
           with_segment "3" decodeC (Array.unsafe_get source 2),
           with_segment "4" decodeD (Array.unsafe_get source 3) )
-      with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple4")
+      with DecodeError (Json_error msg) -> raise @@ DecodeError (Json_error (msg ^ "\n\tin tuple4"))
     else
       let length_str = string_of_int length in
       raise
       @@ DecodeError
-           {j|Expected array of length 4, got array of length $length_str|j}
-  else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify json)
+           (Json_error {j|Expected array of length 4, got array of length $length_str|j})
+  else raise @@ DecodeError (Json_error ("Expected array, got " ^ Js.Json.stringify json))
 
 let dict decode json =
   if Js.Json.test json Object then (
@@ -109,12 +109,12 @@ let dict decode json =
       let key = Array.unsafe_get keys i in
       let value =
         try with_segment key decode (Js.Dict.unsafeGet source key)
-        with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin dict")
+        with DecodeError (Json_error msg) -> raise @@ DecodeError (Json_error (msg ^ "\n\tin dict"))
       in
       Js.Dict.set target key value
     done;
     target)
-  else raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
+  else raise @@ DecodeError (Json_error ("Expected object, got " ^ Js.Json.stringify json))
 
 let field key decode json =
   if Js.Json.test json Object then
@@ -122,10 +122,10 @@ let field key decode json =
     match Js.Dict.get dict key with
     | Some value -> (
         try with_segment key decode value
-        with DecodeError msg ->
-          raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'"))
-    | None -> raise @@ DecodeError {j|Expected field '$(key)'|j}
-  else raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
+        with DecodeError (Json_error msg) ->
+          raise @@ DecodeError (Json_error (msg ^ "\n\tat field '" ^ key ^ "'")))
+    | None -> raise @@ DecodeError (Json_error {j|Expected field '$(key)'|j})
+  else raise @@ DecodeError (Json_error ("Expected object, got " ^ Js.Json.stringify json))
 
 let obj_array f json = dict f json |> Js.Dict.entries
 
@@ -144,9 +144,9 @@ let fieldOptional key decode json =
     | Some value when (Js.Json.test value Null) -> None
     | Some value -> (
         try Some (with_segment key decode value)
-        with DecodeError msg ->
-          raise @@ DecodeError (msg ^ "\n\tat field '" ^ key ^ "'"))
-  else raise @@ DecodeError ("Expected object, got " ^ Js.Json.stringify json)
+        with DecodeError (Json_error msg) ->
+          raise @@ DecodeError (Json_error (msg ^ "\n\tat field '" ^ key ^ "'")))
+  else raise @@ DecodeError (Json_error ("Expected object, got " ^ Js.Json.stringify json))
 
 let fieldDefault s default f =
   fieldOptional s f |> map (function None -> default | Some s -> s)
@@ -157,13 +157,12 @@ let tuple1 f x =
     let length = Js.Array.length source in
     if length = 1 then
       try with_segment "0" f (Array.unsafe_get source 0)
-      with DecodeError msg -> raise @@ DecodeError (msg ^ "\n\tin tuple1")
+      with DecodeError (Json_error msg) -> raise @@ DecodeError (Json_error (msg ^ "\n\tin tuple1"))
     else
       let length_str = string_of_int length in
       raise
-      @@ DecodeError
-           {j|Expected array of length 1, got array of length $length_str|j}
-  else raise @@ DecodeError ("Expected array, got " ^ Js.Json.stringify x)
+      @@ DecodeError (Json_error {j|Expected array of length 1, got array of length $length_str|j})
+  else raise @@ DecodeError (Json_error ("Expected array, got " ^ Js.Json.stringify x))
 
 let enum l json =
   let constr0 j =
@@ -180,20 +179,20 @@ let enum l json =
         (fun () ->
           match List.assoc s l with
           | exception Not_found ->
-              raise @@ DecodeError {j|unknown constructor "$s"|j}
+              raise @@ DecodeError (Json_error {j|unknown constructor "$s"|j})
           | `Single a -> a
           | `Decode _ ->
-              raise @@ DecodeError {j|constructor "$s" expects arguments|j})
+              raise @@ DecodeError (Json_error {j|constructor "$s" expects arguments|j}))
         ()
   | `Constr (s, args) ->
       with_segment s
         (fun () ->
           match List.assoc s l with
           | exception Not_found ->
-              raise @@ DecodeError {j|unknown constructor "$s"|j}
+              raise @@ DecodeError (Json_error {j|unknown constructor "$s"|j})
           | `Single _ ->
               raise
-              @@ DecodeError {j|constructor "$s" doesn't expect arguments|j}
+              @@ DecodeError (Json_error {j|constructor "$s" doesn't expect arguments|j})
           | `Decode d -> decode' d args)
         ()
 
@@ -201,11 +200,11 @@ let option_as_constr f =
   either
     (fun x ->
       if string x = "None" then None
-      else raise (DecodeError ("Expected None, got " ^ Js.Json.stringify x)))
+      else raise (DecodeError (Json_error ("Expected None, got " ^ Js.Json.stringify x))))
     (fun x ->
       match pair string f x with
       | "Some", v -> Some v
-      | _ -> raise (DecodeError ("Expected Some _, got " ^ Js.Json.stringify x)))
+      | _ -> raise (DecodeError (Json_error ("Expected Some _, got " ^ Js.Json.stringify x))))
 
 let adapter (normalize : Js.Json.t -> Js.Json.t) (reader : 'a t) json =
   reader (normalize json)
