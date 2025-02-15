@@ -1,12 +1,12 @@
-include Json.Encode
+include Json.To_json
 
-type 'a t = 'a encoder
+type 'a t = 'a Json.to_json
 
 let make f = f
 
 let encode f x = f x
 
-let unit () = null
+let unit () = Js.Json.null
 
 let int32 s = string (Int32.to_string s)
 
@@ -42,20 +42,22 @@ let obj fields =
               if s = default then acc else (name, encode s) :: acc
           | Some s, None -> (name, encode s) :: acc))
     [] fields
-  |> object_
+  |> Js.Dict.fromList |> json_dict
 
-let tuple1 f x = jsonArray [| f x |]
+let tuple1 f x = json_array [| f x |]
 
 let contramap f g b = g (f b)
 
 let constr0 = string
 
-let constr1 s f x = pair string f (s, x)
+let constr1 s f x = tuple2 string f (s, x)
 
 let option_as_constr f = function
   | None -> string "None"
-  | Some s -> pair string f ("Some", s)
+  | Some s -> tuple2 string f ("Some", s)
 
 let adapter (restore : Js.Json.t -> Js.Json.t) (writer : 'a t) x =
   let encoded = writer x in
   restore encoded
+
+let nullable = option

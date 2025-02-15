@@ -17,58 +17,58 @@ let () =
   describe "roundtrip tests" (fun () ->
     run_test
       ~name:"record"
-      ~write:Test_bs.write_r
-      ~read:Test_bs.read_r
+      ~write:Test_mel.write_r
+      ~read:Test_mel.read_r
       ~data:{Test_t.a = 1; b = "string";};
     run_test
       ~name:"record optional absent"
-      ~write:Test_bs.write_ro
-      ~read:Test_bs.read_ro
+      ~write:Test_mel.write_ro
+      ~read:Test_mel.read_ro
       ~data:{Test_t.c = "s"; o = None;};
     run_test
       ~name:"record optional present"
-      ~write:Test_bs.write_ro
-      ~read:Test_bs.read_ro
+      ~write:Test_mel.write_ro
+      ~read:Test_mel.read_ro
       ~data:{Test_t.c = "s"; o = Some 3L;};
     run_test
       ~name:"variant list"
-      ~write:Test_bs.write_vl
-      ~read:Test_bs.read_vl
+      ~write:Test_mel.write_vl
+      ~read:Test_mel.read_vl
       ~data:[Test_t.A 1; B "s"];
     run_test
       ~name:"variant poly list"
-      ~write:Test_bs.write_vpl
-      ~read:Test_bs.read_vpl
+      ~write:Test_mel.write_vpl
+      ~read:Test_mel.read_vpl
       ~data:[`A 1; `B "s"];
     run_test
       ~name:"tuple"
-      ~write:Test_bs.write_t
-      ~read:Test_bs.read_t
+      ~write:Test_mel.write_t
+      ~read:Test_mel.read_t
       ~data:(1, "s", 1.1);
     run_test
       ~name:"int nullable absent"
-      ~write:Test_bs.write_n
-      ~read:Test_bs.read_n
+      ~write:Test_mel.write_n
+      ~read:Test_mel.read_n
       ~data:None;
     run_test
       ~name:"int nullable present"
-      ~write:Test_bs.write_n
-      ~read:Test_bs.read_n
+      ~write:Test_mel.write_n
+      ~read:Test_mel.read_n
       ~data:(Some 1);
     run_test
       ~name:"int64"
-      ~write:Test_bs.write_myInt
-      ~read:Test_bs.read_myInt
+      ~write:Test_mel.write_myInt
+      ~read:Test_mel.read_myInt
       ~data:3L;
     run_test
       ~name:"recurse"
-      ~write:Test_bs.write_recurse
-      ~read:Test_bs.read_recurse
+      ~write:Test_mel.write_recurse
+      ~read:Test_mel.read_recurse
       ~data:{Test_t.recurse_items = [{ recurse_items = []}]};
     run_test
       ~name:"mutual recurse"
-      ~write:Test_bs.write_mutual_recurse1
-      ~read:Test_bs.read_mutual_recurse1
+      ~write:Test_mel.write_mutual_recurse1
+      ~read:Test_mel.read_mutual_recurse1
       ~data:(
         let rec mutual_recurse1 = { Test_t.mutual_recurse2; }
         and mutual_recurse2 = [{ Test_t.mutual_recurse1 = [] }]
@@ -76,52 +76,52 @@ let () =
       );
     run_test
       ~name:"rec list"
-      ~write:Test_bs.write_rec_list
-      ~read:Test_bs.read_rec_list
+      ~write:Test_mel.write_rec_list
+      ~read:Test_mel.read_rec_list
       ~data:(`List [`Bool;`Bool;`List [`Bool]; `List []]);
     run_test
       ~name:"adapter variant 1"
-      ~write:Test_bs.write_adapted
-      ~read:Test_bs.read_adapted
+      ~write:Test_mel.write_adapted
+      ~read:Test_mel.read_adapted
       ~data:Test_t.(`A {thing = "thing"; other_thing = false;});
     run_test
       ~name:"adapter variant 2"
-      ~write:Test_bs.write_adapted
-      ~read:Test_bs.read_adapted
+      ~write:Test_mel.write_adapted
+      ~read:Test_mel.read_adapted
       ~data:Test_t.(`B {thing = 1;});
     run_test
       ~name:"adapter kind field - variant 1"
-      ~write:Test_bs.write_adapted_kind
-      ~read:Test_bs.read_adapted_kind
+      ~write:Test_mel.write_adapted_kind
+      ~read:Test_mel.read_adapted_kind
       ~data:Test_t.(`A {thing = "thing"; other_thing = false;});
     run_test
       ~name:"adapter kind field - variant 2"
-      ~write:Test_bs.write_adapted_kind
-      ~read:Test_bs.read_adapted_kind
+      ~write:Test_mel.write_adapted_kind
+      ~read:Test_mel.read_adapted_kind
       ~data:Test_t.(`B {thing = 1;});
     run_test
       ~name:"int array"
-      ~write:Test_bs.write_an_array
-      ~read:Test_bs.read_an_array
+      ~write:Test_mel.write_an_array
+      ~read:Test_mel.read_an_array
       ~data:[| 1;2;3;4;5 |];
     run_test
       ~name:"record with optional fields"
-      ~write:Test_bs.write_optional_field
-      ~read:Test_bs.read_optional_field
+      ~write:Test_mel.write_optional_field
+      ~read:Test_mel.read_optional_field
       ~data:{with_default = 1; no_default = None; no_default_nullable = Some 11};
     run_test
       ~name:"adapter scalar"
-      ~write:Test_bs.write_adapted_scalar
-      ~read:Test_bs.read_adapted_scalar
+      ~write:Test_mel.write_adapted_scalar
+      ~read:Test_mel.read_adapted_scalar
       ~data:(`A 1);
     run_test
       ~name:"adapter scalar - variant 2"
-      ~write:Test_bs.write_adapted_scalar
-      ~read:Test_bs.read_adapted_scalar
+      ~write:Test_mel.write_adapted_scalar
+      ~read:Test_mel.read_adapted_scalar
       ~data:(`B "thing");
     run_test
       ~name:"adapter list"
-      ~write:Test_bs.write_adapted_list
-      ~read:Test_bs.read_adapted_list
+      ~write:Test_mel.write_adapted_list
+      ~read:Test_mel.read_adapted_list
       ~data:(`A [1]);
   )

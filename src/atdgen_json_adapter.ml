@@ -28,7 +28,7 @@ module Type_field = struct
           match o |> Js.Json.classify with
           | JSONObject obj ->
               Js.Dict.set obj type_field_name v;
-              Json.Encode.jsonDict obj
+              Json.To_json.json_dict obj
           | _ -> json)
       | _ -> json
   end

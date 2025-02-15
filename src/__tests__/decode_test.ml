@@ -14,12 +14,12 @@ let run_decode_test ~name ~read ~data ~expected =
 let () =
   describe "JSON decoding tests" (fun () ->
       run_decode_test ~name:"nullable field decoding a null"
-        ~read:Test_bs.read_optional_field
+        ~read:Test_mel.read_optional_field
         ~expected:
           { with_default = 9; no_default = None; no_default_nullable = None }
         ~data:[%raw {|{ no_default_nullable: null }|}];
       run_decode_test ~name:"optional field decoding a null"
-        ~read:Test_bs.read_optional_field
+        ~read:Test_mel.read_optional_field
         ~expected:
           { with_default = 9; no_default = None; no_default_nullable = None }
         ~data:[%raw {|{ no_default: null}|}])

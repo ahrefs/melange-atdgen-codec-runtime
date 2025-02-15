@@ -6,10 +6,10 @@
   (pps melange.ppx)))
 
 (rule
- (targets test_bs.ml test_bs.mli)
+ (targets test_mel.ml test_mel.mli)
  (deps test.atd)
  (action
-  (run atdgen -bs %{deps})))
+  (run atdgen -mel %{deps})))
 
 (rule
  (targets test_t.ml test_t.mli)

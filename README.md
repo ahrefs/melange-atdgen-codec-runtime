@@ -21,10 +21,10 @@ To generate `ml` files from `atd` ones, add a couple of rules to your `dune` fil
 
 ```clojure
 (rule
- (targets test_bs.ml test_bs.mli)
+ (targets test_mel.ml test_mel.mli)
  (deps test.atd)
  (action
-  (run atdgen -bs %{deps})))
+  (run atdgen -mel %{deps})))
 
 (rule
  (targets test_t.ml test_t.mli)
@@ -67,7 +67,7 @@ let get = (url, decode) =>
 let v: Meetup_t.events =
   get(
     "http://localhost:8000/events",
-    Atdgen_codec_runtime.Decode.decode(Meetup_bs.read_events),
+    Atdgen_codec_runtime.Decode.decode(Meetup_mel.read_events),
   );
 ```
 

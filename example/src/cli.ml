@@ -18,12 +18,12 @@ let read_events () =
   (* parse the json *)
   let json = Js.Json.parseExn file_content in
   (* turn it into a proper record *)
-  let events: Meetup_t.events = Atdgen_codec_runtime.Decode.decode Meetup_bs.read_events json in
+  let events: Meetup_t.events = Atdgen_codec_runtime.Decode.decode Meetup_mel.read_events json in
   events
 
 let write_events events =
   (* turn a list of records into json *)
-  let json = Atdgen_codec_runtime.Encode.encode Meetup_bs.write_events events in
+  let json = Atdgen_codec_runtime.Encode.encode Meetup_mel.write_events events in
   (* convert the json to string *)
   let file_content = Js.Json.stringifyWithSpace json 2 in
   (* write the json in our file *)

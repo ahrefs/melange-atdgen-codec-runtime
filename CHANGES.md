@@ -1,3 +1,7 @@
+## Next
+
+- Update to latest melange-json with unified runtime, [#53](https://github.com/ahrefs/melange-atdgen-codec-runtime/pull/53)
+
 ## 3.0.0 (2024-02-06)
 
 - Expose `DecodeErrorPath`, [#51](https://github.com/ahrefs/melange-atdgen-codec-runtime/pull/51)
