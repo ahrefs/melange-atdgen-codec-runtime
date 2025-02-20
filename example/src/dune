@@ -5,10 +5,10 @@
  (promote (until-clean)))
 
 (rule
- (targets meetup_bs.ml meetup_bs.mli)
+ (targets meetup_mel.ml meetup_mel.mli)
  (deps meetup.atd)
  (action
-  (run atdgen -bs %{deps})))
+  (run atdgen -mel %{deps})))
 
 (rule
  (targets meetup_t.ml meetup_t.mli)
