@@ -1,3 +1,7 @@
+## Next
+
+- Add `2.16.0` as lower bound version of `atdgen`, [#54](https://github.com/ahrefs/melange-atdgen-codec-runtime/pull/54)
+
 ## 3.0.0 (2024-02-06)
 
 - Expose `DecodeErrorPath`, [#51](https://github.com/ahrefs/melange-atdgen-codec-runtime/pull/51)

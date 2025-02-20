@@ -13,7 +13,7 @@ depends: [
   "ocaml"
   "melange" {>= "3.0.0"}
   "atd"
-  "atdgen"
+  "atdgen" {>= "2.16.0"}
   "melange-json"
   "melange-jest" {with-test}
   "reason" {with-test}
