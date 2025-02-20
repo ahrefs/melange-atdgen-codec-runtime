@@ -17,7 +17,7 @@ depends: [
   "melange-json"
   "melange-jest" {with-test}
   "reason" {with-test}
-  "opam-check-npm-deps" {with-test}
+  "opam-check-npm-deps" {with-dev-setup}
   "odoc" {with-doc}
 ]
 build: [
