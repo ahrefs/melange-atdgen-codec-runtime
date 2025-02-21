@@ -1,6 +1,6 @@
 (*
   atdgen -t test.atd
-  atdgen -bs test.atd -open Test_t
+  atdgen -mel test.atd -open Test_t
 *)
 
 type myInt = int <ocaml repr="int64">
