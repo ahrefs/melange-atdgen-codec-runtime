@@ -1,6 +1,6 @@
-include Json.To_json
+include Melange_json.To_json
 
-type 'a t = 'a Json.to_json
+type 'a t = 'a Melange_json.to_json
 
 let make f = f
 
